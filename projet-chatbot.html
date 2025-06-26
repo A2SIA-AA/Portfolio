@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot RAG Documentaire</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    header {
+      background-color: #0a192f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      color: white;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    h2 {
+      color: #0a192f;
+      margin-top: 1.5rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: #0a192f;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #112240;
+    }
+
+    footer {
+      background-color: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Chatbot RAG Documentaire (en cours)</h1>
+</header>
+
+<main>
+  <h2>Une IA au service de la documentation</h2>
+  <p>
+    Ce projet, mené dans le cadre de mon stage chez AMDIE, a pour objectif de concevoir un chatbot intelligent capable de répondre à des questions précises à partir de documents internes : PDF, Word, tableaux Excel, pages HTML, voire images.
+  </p>
+  <p>
+    Plutôt que de "tout savoir", ce chatbot va chercher dans les documents les plus pertinents pour répondre, grâce à l’approche <strong>RAG – Retrieval-Augmented Generation</strong>. C’est un projet très stimulant, car il mêle NLP, vectorisation, gestion des droits d’accès, et architecture multi-agents.
+  </p>
+
+  <h2>Ce que j’ai mis en place</h2>
+  <ul>
+    <li>Un pipeline d’extraction multi-formats : <code>Unstructured</code>, <code>Pandas</code>, <code>BeautifulSoup</code>…</li>
+    <li>Stockage vectorisé des documents avec <code>HuggingFace embeddings</code> dans <code>ChromaDB</code></li>
+    <li>Filtrage fin selon les rôles et les droits d’accès (via les métadonnées)</li>
+    <li>Agents spécialisés (calcul, extraction, réponse) orchestrés pour dialoguer</li>
+    <li>Génération des réponses via <code>Gemini</code>, en s’appuyant uniquement sur les sources autorisées</li>
+  </ul>
+
+  <h2>En cours jusqu’à fin août</h2>
+  <p>
+    Le projet est toujours en cours de développement. La structure technique est en cours de mise en place, et les prochaines étapes porteront sur :
+  </p>
+  <ul>
+    <li>Renforcement de la gestion des logs et du suivi utilisateur</li>
+    <li>Ajout d’une interface web pour la démonstration</li>
+    <li>Amélioration de la reformulation des requêtes</li>
+    <li>Tests de modèles LLM légers pour une exécution locale</li>
+  </ul>
+
+  <p><em>Une mise à jour de cette page (avec captures) est prévue dès la fin du stage.</em></p>
+  <p>
+  <img src="images/chat_bot.png" alt="Liste des enchères en cours" class="screenshot" style="width: 300px; "border-radius: 5px;">
+  </p>
+  
+  <a href="projets.html" class="back-button">← Retour aux projets</a>
+</main>
+
+<footer>
+  <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
+

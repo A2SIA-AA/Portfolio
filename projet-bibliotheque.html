@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Bibliothèque d’Alexandrie – Java/JavaFX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #1a1a1a;
+      margin: 0;
+    }
+    header {
+      background-color: #0a192f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      color: white;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #0a192f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #e0f2ff;
+    }
+    pre {
+      background: #e0f2ff;
+      padding: 1rem;
+      overflow: auto;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: #0a192f;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      background-color: #112240;
+    }
+    .screenshot {
+      max-width: 100%;
+      border-radius: 5px;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+    }
+    footer {
+      background-color: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>La Bibliothèque d’Alexandrie – Application Java</h1>
+  </header>
+  <main>
+    <h2> Une interface au service de la culture</h2>
+    <p>Ce projet Java a été une vraie bouffée d’air frais. En commencant par un modèle console classique, nous avons réimaginé une bibliothèque virtuelle dans laquelle les utilisateurs peuvent emprunter, restituer ou prolonger leurs lectures. Ce qui m'a particulièrement plu ? La création de l’interface graphique en JavaFX !</p>
+
+    <img src="images/inscription.png" alt="Capture de l'interface JavaFX" class="screenshot">
+
+    <h2> Objectif du projet</h2>
+    <p>Simuler le fonctionnement d’une médiathèque : gestion des adhérents, des ouvrages, des emprunts et pénalités, avec une attention particulière portée à la clarté du code et à l’ergonomie de l’interface.</p>
+
+    <h2>Technologies utilisées</h2>
+    <ul>
+      <li><strong>Java</strong> – pour la logique métier et les classes</li>
+      <li><strong>JavaFX</strong> – pour l’interface graphique (FXML)</li>
+      <li><strong>UML</strong> – pour la modélisation</li>
+    </ul>
+
+    <h2>Structure du projet</h2>
+    <table>
+      <tr><th>Fichier</th><th>Rôle</th></tr>
+      <tr><td>Adherent.java</td><td>Classe représentant un utilisateur</td></tr>
+      <tr><td>Bibliotheque.java</td><td>Modèle principal</td></tr>
+      <tr><td>interface.fxml</td><td>Structure visuelle de l'interface</td></tr>
+      <tr><td>MediathequeController.java</td><td>Contrôleur JavaFX</td></tr>
+      <tr><td>Diagramme de Classe UML.png</td><td>Vue structurelle des objets</td></tr>
+    </table>
+
+    <h2>Diagrammes UML</h2>
+    <p>Voici un aperçu de notre architecture :</p>
+    <img src="images/Diagramme de Classe UML.png" alt="Diagramme de classe UML" class="screenshot">
+    <img src="images/Diagramme de cas d'utilisation.png" alt="Diagramme de cas d'utilisation" class="screenshot">
+    <img src="images/Diagramme de séquence Emprunter.png" alt="Diagramme de séquence" class="screenshot">
+
+    <h2>Lancement</h2>
+    <pre>
+# Compilation
+javac --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml NomFichier.java
+
+# Exécution
+java --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml main
+    </pre>
+
+    <h2>Ce que j’ai appris</h2>
+    <ul>
+      <li>Créer une interface fluide et intuitive avec JavaFX</li>
+      <li>Traduire des exigences fonctionnelles en modèles UML</li>
+      <li>Utiliser les exceptions pour gérer les erreurs utilisateurs</li>
+      <li>Protéger les mots de passe avec SHA-256</li>
+    </ul>
+
+   <h2>Lien GitHub</h2>
+    <p><a href="https://github.com/A2SIA-AA/Bibliotheque.git" target="_blank">Voir le projet sur GitHub</a></p>
+
+    <a href="projets.html" class="back-button">← Retour aux projets</a>
+  </main>
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+  </footer>
+</body>
+</html>
+
+

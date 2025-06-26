@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVD Image Compression</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #1a1a1a;
+      margin: 0;
+    }
+    header {
+      background-color: #0a192f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      color: white;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    footer {
+      background-color: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+    h1, h2 {
+      color: #0a192f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #e0f2ff;
+    }
+    pre {
+      background: #e0f2ff;
+      padding: 1rem;
+      overflow: auto;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: #0a192f;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      background-color: #112240;
+    }
+  </style>
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // LENA
+    const kLena = document.getElementById("kLena");
+    const imgLena = document.getElementById("imgLena");
+
+    kLena.addEventListener("change", function () {
+      const k = this.value;
+      imgLena.src = `images/lena_k${k}.png`;
+    });
+
+    // TIGRE
+    const kTigre = document.getElementById("kTigre");
+    const imgTigre = document.getElementById("imgTigre");
+
+    kTigre.addEventListener("change", function () {
+      const k = this.value;
+      imgTigre.src = `images/tigre_k${k}.png`;
+    });
+  });
+</script>
+
+
+<body>
+  <header>
+    <h1>SVD-Image-Compression</h1>
+  </header>
+  <main>
+    <h2>Un projet qui voit plus clair</h2>
+    <p>Tout est parti d'une question simple : comment réduire la taille d'une image sans en perdre l’essence ? Avec Hoda, on a plongé dans le monde des matrices pour trouver une réponse élégante et mathématiquement rigoureuse : la <strong>décomposition en valeurs singulières</strong>.</p>
+
+    <p>Le cœur du projet repose sur l’idée que chaque image peut être décomposée en une somme de motifs élémentaires. En ne gardant que les plus significatifs, on parvient à reconstruire l’essentiel... avec beaucoup moins de données. C’est un peu comme résumer un roman sans en trahir l’histoire.</p>
+
+    <h2>Qui sommes-nous ?</h2>
+    <p><strong>Auteurs :</strong> Doubli Hoda & Assia AIT TALEB – INSA Rouen, GM3</p>
+    <p><strong>Date :</strong> Février 2024</p>
+
+    <h2>1. Ce que contient le projet</h2>
+    <table>
+      <tr><th>Fichier / Dossier</th><th>Description</th></tr>
+      <tr><td>algo.py</td><td>Nos fonctions maison pour la SVD, sans bibliothèque externe</td></tr>
+      <tr><td>main.py</td><td>Script de lancement CLI : choix d'image et compression</td></tr>
+      <tr><td>images</td><td>Images tests (lena, mandrill, tigre)</td></tr>
+      <tr><td>report_SVD_Compression.pdf</td><td>Rapport complet avec théorie, démonstrations et résultats</td></tr>
+      <tr><td>README.md</td><td>Résumé rapide du projet</td></tr>
+    </table>
+
+    <h2>2. Comprendre la magie de la SVD</h2>
+    <ul>
+      <li>SVD : toute matrice A peut s’écrire comme A = UΣVᵀ</li>
+      <li>Tronquer Σ revient à « compresser » sans trop perdre en qualité</li>
+      <li>Le théorème d’Eckart-Young garantit la meilleure approximation possible</li>
+    </ul>
+
+    <h2>3. Comment l’utiliser</h2>
+    <pre><code>python main.py</code></pre>
+    <p>Le programme vous demandera de choisir une image et un rang de compression <code>k</code>. Ensuite, il génère l’image compressée correspondante.</p>
+    
+<h2>Visualisation interactive de la compression</h2>
+<p>Comparez deux images compressées avec différents rangs <code>k</code> :</p>
+
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
+
+  <!-- Bloc LENA -->
+  <div style="text-align: center;">
+    <h3>Lena</h3>
+    <img id="imgLena" src="images/lena_k10.png" alt="Lena compressée" style="max-width: 300px; border-radius: 5px;">
+    <br>
+    <select id="kLena" style="margin-top: 1rem; padding: 0.5rem; font-size: 1rem;">
+      <option value="10">k = 10</option>
+      <option value="100">k = 100</option>
+      <option value="255">k = 255</option>
+    </select>
+  </div>
+
+  <!-- Bloc TIGRE -->
+  <div style="text-align: center;">
+    <h3>Tigre</h3>
+    <img id="imgTigre" src="images/tigre_k10.png" alt="Tigre compressé" style="width: 340px; "border-radius: 5px;">
+    <br>
+    <select id="kTigre" style="margin-top: 1rem; padding: 0.5rem; font-size: 1rem;">
+      <option value="10">k = 10</option>
+      <option value="100">k = 100</option>
+      <option value="360">k = 360</option>
+    </select>
+  </div>
+
+</div>
+
+    <h2>5. Ce qu'on a appris</h2>
+    <ul>
+      <li>La SVD, ce n’est pas qu’une formule : c’est un outil puissant pour la compression</li>
+      <li>Nos propres fonctions SVD, testées contre NumPy, ont bien tenu le choc</li>
+      <li>Choisir <code>k</code> est un équilibre entre qualité visuelle et gain mémoire</li>
+    </ul>
+
+    <h2>Lien GitHub</h2>
+    <p>
+      <a href="https://github.com/A2SIA-AA/Compression_Image.git" target="_blank">Voir le projet sur GitHub</a>
+    </p>
+
+    <a href="projets.html" class="back-button">← Retour aux projets</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+  </footer>
+</body>
+</html>
+

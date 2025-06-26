@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet - JHAL-AUCTION</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #1a1a1a;
+      margin: 0;
+    }
+    header {
+      background-color: #0a192f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      color: white;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h2 {
+      color: #0a192f;
+      margin-top: 1.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #e0f2ff;
+    }
+    a {
+      color: #2563eb;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: #0a192f;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      background-color: #112240;
+    }
+    .screenshot {
+      max-width: 100%;
+      border-radius: 5px;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+    }
+    footer {
+      background-color: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JHAL-AUCTION - Salle des ventes en Java</h1>
+  </header>
+  <main>
+    <h2>Un semestre d’enchères et de défis</h2>
+    <p>Ce projet, c’est bien plus qu’une simple salle des ventes. Pendant un semestre entier, notre équipe a jonglé entre modélisation, conception, prises de décisions… et parfois de vraies divergences d’opinion.</p>
+
+    <p>Tout a commencé avec une idée simple : créer une plateforme d’enchères en ligne, avec des utilisateurs, des véhicules, et un commissaire priseur. Facile à dire ! Mais dès la phase d’implémentation, nous avons réalisé que notre première modélisation ne couvrait pas tous les cas... Il a fallu revenir à la planche à dessin, discuter, négocier, et trouver un terrain d’entente.</p>
+
+    <p>De mon côté, la connexion en temps réel entre les messages réseau et l’interface graphique fut un vrai casse-tête. Il a fallu synchroniser JavaFX avec UDP et des threads. Mais grâce à l’aide du groupe, on a pu tout faire marcher. C’est ce genre de complexité qu’on aime... après l’avoir résolue ! </p>
+
+    <img src="images/jhal_auction.png" alt="Interface des enchères" class="screenshot">
+
+    <h2>Auteurs</h2>
+    <p>Assia AIT TALEB, Loraine DICKO, Hoda DOUBLI, Joëlle FARHAT<br>
+    Date : Décembre 2024<br>
+    GM4 - INSA Rouen</p>
+
+    <h2>Objectif</h2>
+    <p>Créer une salle des ventes interactive où les utilisateurs peuvent s’inscrire, consulter les offres disponibles et participer à des enchères en direct.</p>
+
+    <h2>Structure du projet</h2>
+    <table>
+      <tr><th>Dossier / fichier</th><th>Fonction</th></tr>
+      <tr><td>Communication/</td><td>Messages UDP (sérialisation, écoute, diffusion)</td></tr>
+      <tr><td>ServeurEnchere.java</td><td>Serveur UDP, communication réseau + base SQLite</td></tr>
+      <tr><td>Utilisateur.java</td><td>Client (inscription, enchères, réclamations)</td></tr>
+      <tr><td>Commissaire.java</td><td>Ajout de véhicules, animation des enchères</td></tr>
+      <tr><td>DataBase.java</td><td>Gestion des tables (offres, utilisateurs...)</td></tr>
+      <tr><td>FXML + Controller</td><td>Interface graphique JavaFX (menus, offres, réclamations)</td></tr>
+    </table>
+
+    <h2>Fonctionnalités techniques</h2>
+    <ul>
+      <li>UDP multicast pour la synchronisation en temps réel entre clients</li>
+      <li>JavaFX pour une interface fluide</li>
+      <li>Base SQLite pour la persistance des utilisateurs, offres, historiques</li>
+      <li>SHA-256 pour le hachage des mots de passe</li>
+      <li>Requêtes asynchrones pour l’interface</li>
+    </ul>
+
+
+    <h2>Captures d’écran et diagrammes</h2>
+    <img src="images/enchere.png" alt="Liste des enchères en cours" class="screenshot">
+    <img src="images/usecase_jhalauction.png" alt="Diagramme de cas d'utilisation" class="screenshot">
+    <img src="images/classe_jhalauction.png" alt="Diagramme de classe" class="screenshot">
+
+    <h2>Lien GitHub</h2>
+    <p>
+      <a href="https://github.com/A2SIA-AA/JhalAuction.git" target="_blank">Voir le projet sur GitHub</a>
+    </p>
+
+    <a href="projets.html" class="back-button">← Retour aux projets</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+  </footer>
+</body>
+</html>
+

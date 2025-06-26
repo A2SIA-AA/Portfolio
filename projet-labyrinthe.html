@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet – Labyrinthes en C</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    header {
+      background-color: #0a192f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      color: white;
+    }
+
+    footer {
+      background-color: #0a192f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      color: #0a192f;
+    }
+
+    ul, table {
+      margin-top: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e0f2ff;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      background-color: #0a192f;
+      color: #64ffda;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #112240;
+    }
+
+    .screenshot {
+      max-width: 100%;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Simulation de Labyrinthes en C</h1>
+  </header>
+  <main>
+    <h2>Auteurs</h2>
+    <p>Doubli Hoda & Assia AIT TALEB (GM3)<br>
+       Date : Novembre 2023</p>
+
+    <h2>1. Une aventure algorithmique</h2>
+    <p>Ce projet n’était pas un simple devoir technique, mais une immersion dans le monde fascinant des algorithmes. Avec Hoda, nous avons uni nos forces pour concevoir une application capable de générer et résoudre des labyrinthes - un défi qui s’est vite transformé en une belle aventure de logique et de patience.</p>
+
+    <p>Le vrai tournant ? Comprendre que tout reposait sur la récursivité. Nous étions souvent tentées de passer directement au code, mais cette fois, c’est sur papier que nous avons pris le temps de visualiser les étapes. Ce moment d’alignement entre nous deux a complètement débloqué la suite. C’était aussi une belle leçon : prendre du recul, discuter, schématiser... avant de coder.</p>
+
+    <h2>2. Comment ça marche ?</h2>
+    <p>Imaginez une grille vide. Notre programme commence à y « creuser » un labyrinthe, en explorant chaque direction, en revenant en arrière si besoin, et en évitant les répétitions. Une fois le labyrinthe terminé, il ne reste plus qu’à le résoudre, comme une énigme logique.</p>
+    <p>Voici les étapes clés :</p>
+    <table>
+      <tr>
+        <th>Étape</th>
+        <th>Algorithme</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td>Génération</td>
+        <td>Backtracking</td>
+        <td>Exploration en profondeur, récursive</td>
+      </tr>
+      <tr>
+        <td>Génération</td>
+        <td>Division récursive</td>
+        <td>Division de la grille en sous-espaces, puis connexion</td>
+      </tr>
+      <tr>
+        <td>Résolution</td>
+        <td>Backtracking</td>
+        <td>Marche jusqu’à la sortie en explorant toutes les voies</td>
+      </tr>
+      <tr>
+        <td>Résolution</td>
+        <td>Dijkstra</td>
+        <td>Calcule le plus court chemin avec priorité au coût</td>
+      </tr>
+    </table>
+
+    <h2>3. Compilation & exécution</h2>
+    <p>Pour compiler et exécuter rapidement notre application :</p>
+    <pre>
+# À la racine du projet
+gcc main.c -o mon_appli
+./mon_appli
+    </pre>
+
+    <h2>4. Interface console</h2>
+    <ul>
+      <li>Choix du mode de génération</li>
+      <li>Choix du mode de résolution</li>
+    </ul>
+    <p>Le résultat : une représentation ASCII du labyrinthe généré, puis une version annotée du chemin trouvé.</p>
+
+    <h2>5. Quelques visuels</h2>
+    <p>Labyrinthe généré :</p>
+    <img src="images/lab_genere.png" alt="Labyrinthe généré" class="screenshot">
+    <p>Labyrinthe résolu :</p>
+    <img src="images/lab_resolu.png" alt="Labyrinthe résolu" class="screenshot">
+
+    <h2>6. Performances</h2>
+    <p>Nous avons testé plusieurs tailles et comparé les temps d’exécution :</p>
+    <table>
+      <tr>
+        <th>Taille</th>
+        <th>Gén. Backtracking</th>
+        <th>Gén. Division</th>
+        <th>Rés. Backtracking</th>
+        <th>Rés. Dijkstra</th>
+      </tr>
+      <tr>
+        <td>20 × 20</td>
+        <td>0,00019 s</td>
+        <td>≈ 0 s</td>
+        <td>0,00006 s</td>
+        <td>0,00015 s</td>
+      </tr>
+      <tr>
+        <td>30 × 40</td>
+        <td>0,00038 s</td>
+        <td>0,00023 s</td>
+        <td>0,00018 s</td>
+        <td>0,00033 s</td>
+      </tr>
+    </table>
+
+    <h2>7. Inspirations</h2>
+    <ul>
+      <li>Articles sur les générateurs de labyrinthes</li>
+      <li>Support de cours sur les graphes et récursivité</li>
+      <li>Ressources officielles sur l’algorithme de Dijkstra</li>
+    </ul>
+
+    <h2>Lien GitHub</h2>
+    <p>
+      <a href="https://github.com/A2SIA-AA/Labyrinthe.git" target="_blank">Voir le projet sur GitHub</a>
+    </p>
+
+    <a href="projets.html" class="back-button">← Retour aux projets</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+  </footer>
+</body>
+</html>
+
