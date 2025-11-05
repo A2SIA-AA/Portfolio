@@ -3,147 +3,556 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Bibliothèque d’Alexandrie – Java/JavaFX</title>
+  <title>Bibliothèque d'Alexandrie - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
-    header h1 {
-      color: white;
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
-    main {
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
+    }
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
       max-width: 900px;
-      margin: auto;
-      padding: 2rem;
+      margin: 0 auto;
     }
-    h1, h2 {
-      color: #0a192f;
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
     }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
+
     th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
+      border: 1px solid var(--bleu-clair);
+      padding: 1rem;
       text-align: left;
     }
+
     th {
-      background-color: #e0f2ff;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      font-weight: 600;
     }
-    pre {
-      background: #e0f2ff;
-      padding: 1rem;
-      overflow: auto;
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
     }
-    a {
-      color: #2563eb;
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
       text-decoration: none;
-      font-weight: bold;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      border: 2px solid transparent;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .btn-github {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      border-color: var(--gris-fonce);
     }
-    .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
-      text-decoration: none;
+
+    .btn-github:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44,62,80,0.25);
     }
-    .back-button:hover {
-      background-color: #112240;
-    }
-    .screenshot {
-      max-width: 100%;
-      border-radius: 5px;
-      margin: 1rem 0;
-      border: 1px solid #ccc;
-    }
-    footer {
-      background-color: #0a192f;
-      color: white;
+
+
+/* Images des projets */
+.project-image {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--gris-clair);
+  border-radius: 15px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-image img {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+
+    /* Bouton retour */
+    .back-section {
       text-align: center;
-      padding: 1rem;
+      margin: 3rem 0;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
       margin-top: 4rem;
-      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>La Bibliothèque d’Alexandrie – Application Java</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>La Bibliothèque d'Alexandrie</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Application Java avec interface JavaFX</p>
+      <div class="project-meta">
+        <span>📅 Juin 2024</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Binôme avec Hoda</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">JavaFX</span>
+        <span class="tech-tag">FXML</span>
+        <span class="tech-tag">UML</span>
+        <span class="tech-tag">SHA-256</span>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-github" href="https://github.com/A2SIA-AA/Bibliotheque" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+          Voir sur GitHub
+        </a>
+      </div>
+    </div>
   </header>
-  <main>
-    <h2> Une interface au service de la culture</h2>
-    <p>Ce projet Java a été une vraie bouffée d’air frais. En commencant par un modèle console classique, nous avons réimaginé une bibliothèque virtuelle dans laquelle les utilisateurs peuvent emprunter, restituer ou prolonger leurs lectures. Ce qui m'a particulièrement plu ? La création de l’interface graphique en JavaFX !</p>
 
-    <img src="images/inscription.png" alt="Capture de l'interface JavaFX" class="screenshot">
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Une interface au service de la culture</h2>
 
-    <h2> Objectif du projet</h2>
-    <p>Simuler le fonctionnement d’une médiathèque : gestion des adhérents, des ouvrages, des emprunts et pénalités, avec une attention particulière portée à la clarté du code et à l’ergonomie de l’interface.</p>
+        <p>
+          Ce projet Java a été <span class="highlight">une vraie bouffée d'air frais.</span> En commençant par un modèle console classique, nous avons réimaginé avec Hoda une bibliothèque virtuelle dans laquelle les utilisateurs peuvent emprunter, restituer ou prolonger leurs lectures.
+        </p>
 
-    <h2>Technologies utilisées</h2>
-    <ul>
-      <li><strong>Java</strong> – pour la logique métier et les classes</li>
-      <li><strong>JavaFX</strong> – pour l’interface graphique (FXML)</li>
-      <li><strong>UML</strong> – pour la modélisation</li>
-    </ul>
+        <p>
+          L'objectif était simple : simuler le fonctionnement d'une médiathèque avec gestion des adhérents, des ouvrages, des emprunts et des pénalités. Mais ce qui m'a vraiment plu, c'était la partie graphique.
+        </p>
 
-    <h2>Structure du projet</h2>
-    <table>
-      <tr><th>Fichier</th><th>Rôle</th></tr>
-      <tr><td>Adherent.java</td><td>Classe représentant un utilisateur</td></tr>
-      <tr><td>Bibliotheque.java</td><td>Modèle principal</td></tr>
-      <tr><td>interface.fxml</td><td>Structure visuelle de l'interface</td></tr>
-      <tr><td>MediathequeController.java</td><td>Contrôleur JavaFX</td></tr>
-      <tr><td>Diagramme de Classe UML.png</td><td>Vue structurelle des objets</td></tr>
-    </table>
+        <div class="anecdote">
+          <p>
+            💡 <strong>Le plaisir de JavaFX :</strong> Après avoir passé pas mal de temps sur des interfaces console ou des projets très orientés algorithmes, pouvoir créer une vraie interface graphique avec JavaFX, c'était rafraîchissant. Dessiner les fenêtres avec FXML, lier les événements aux contrôleurs, voir l'application prendre vie visuellement... J'ai adoré cette phase. C'est là que j'ai réalisé à quel point l'interface utilisateur compte pour l'expérience globale d'une application.
+          </p>
+        </div>
 
-    <h2>Diagrammes UML</h2>
-    <p>Voici un aperçu de notre architecture :</p>
-    <img src="images/Diagramme de Classe UML.png" alt="Diagramme de classe UML" class="screenshot">
-    <img src="images/Diagramme de cas d'utilisation.png" alt="Diagramme de cas d'utilisation" class="screenshot">
-    <img src="images/Diagramme de séquence Emprunter.png" alt="Diagramme de séquence" class="screenshot">
+        <p>
+          Avec Hoda, on a travaillé sur toute la chaîne : <span class="highlight">modélisation UML, architecture MVC, implémentation des classes métier, et surtout l'interface.</span> On voulait quelque chose de fluide, d'intuitif. Que l'utilisateur puisse s'inscrire, se connecter, emprunter un livre... sans friction.
+        </p>
 
-    <h2>Lancement</h2>
-    <pre>
-# Compilation
-javac --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml NomFichier.java
+        <p>
+          Un détail qui m'a particulièrement intéressée : la sécurité. On a utilisé SHA-256 pour hasher les mots de passe. Parce qu'une bibliothèque virtuelle, c'est bien, mais une bibliothèque virtuelle sécurisée, c'est mieux. Même sur un projet étudiant, <span class="highlight">on voulait faire les choses proprement.</span>
+        </p>
 
-# Exécution
-java --module-path $PATH_TO_FX/lib --add-modules javafx.controls,javafx.fxml main
-    </pre>
+        <p>
+          Ce projet m'a appris à penser l'expérience utilisateur dès la conception. Parce que le code peut être parfait, mais si l'interface est confuse, personne n'utilisera l'application. C'était une belle leçon de design et d'ergonomie, en plus de la technique pure.
+        </p>
 
-    <h2>Ce que j’ai appris</h2>
-    <ul>
-      <li>Créer une interface fluide et intuitive avec JavaFX</li>
-      <li>Traduire des exigences fonctionnelles en modèles UML</li>
-      <li>Utiliser les exceptions pour gérer les erreurs utilisateurs</li>
-      <li>Protéger les mots de passe avec SHA-256</li>
-    </ul>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎨 Conception de l'interface :</span> Passer d'une logique console à une interface graphique fluide nécessitait de repenser totalement l'interaction utilisateur.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔗 FXML et contrôleurs :</span> Maîtriser la liaison entre les fichiers FXML et les contrôleurs Java, gérer les événements correctement.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 Gestion des états :</span> Synchroniser l'affichage avec les opérations métier (emprunts, retours, pénalités) en temps réel.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⚠️ Gestion des exceptions :</span> Prévoir tous les cas d'erreur possibles et informer l'utilisateur de manière claire.</li>
+        </ul>
 
-   <h2>Lien GitHub</h2>
-    <p><a href="https://github.com/A2SIA-AA/Bibliotheque.git" target="_blank">Voir le projet sur GitHub</a></p>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🖼️ JavaFX et FXML :</span> Créer des interfaces graphiques modernes avec Scene Builder, gérer les layouts et les événements.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🏗️ Architecture MVC :</span> Séparer clairement les responsabilités entre modèle, vue et contrôleur pour un code maintenable.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔐 Sécurité des données :</span> Implémenter un hachage SHA-256 pour protéger les mots de passe, même dans un projet académique.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📐 Modélisation UML :</span> Traduire des exigences fonctionnelles en diagrammes de classes, cas d'utilisation et séquences.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 UX Design :</span> Comprendre que la qualité d'une application ne se mesure pas qu'à son code, mais aussi à son utilisabilité.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">👥 Travail en binôme :</span> Répartir les tâches efficacement avec Hoda, s'entraider sur les points bloquants.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <a href="projets.html" class="back-button">← Retour aux projets</a>
-  </main>
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
+
+      <h2>Fonctionnement technique</h2>
+
+      <div class="project-image">
+        <!-- Placeholder pour screenshot - à remplacer -->
+        <img src="images/inscription.png" alt="Screenshot de l'application">
+      </div>
+
+      <h3>Objectif du projet</h3>
+      <p>
+        Simuler le fonctionnement d'une médiathèque : gestion des adhérents, des ouvrages, des emprunts et pénalités, avec une attention particulière portée à la clarté du code et à l'ergonomie de l'interface.
+      </p>
+
+      <h3>Technologies utilisées</h3>
+      <ul>
+        <li><strong>Java</strong> - pour la logique métier et les classes</li>
+        <li><strong>JavaFX</strong> - pour l'interface graphique (FXML)</li>
+        <li><strong>UML</strong> - pour la modélisation</li>
+        <li><strong>SHA-256</strong> - pour la sécurité des mots de passe</li>
+      </ul>
+
+      <h3>Structure du projet</h3>
+      <table>
+        <tr>
+          <th>Fichier</th>
+          <th>Rôle</th>
+        </tr>
+        <tr>
+          <td>Adherent.java</td>
+          <td>Classe représentant un utilisateur</td>
+        </tr>
+        <tr>
+          <td>Bibliotheque.java</td>
+          <td>Modèle principal</td>
+        </tr>
+        <tr>
+          <td>interface.fxml</td>
+          <td>Structure visuelle de l'interface</td>
+        </tr>
+        <tr>
+          <td>MediathequeController.java</td>
+          <td>Contrôleur JavaFX</td>
+        </tr>
+      </table>
+
+      <h3>Fonctionnalités</h3>
+      <ul>
+        <li>Inscription et connexion des adhérents</li>
+        <li>Consultation du catalogue d'ouvrages</li>
+        <li>Emprunt, restitution et prolongation de livres</li>
+        <li>Gestion des pénalités pour retards</li>
+        <li>Interface graphique fluide et intuitive</li>
+        <li>Sécurisation des mots de passe avec hachage SHA-256</li>
+      </ul>
+
+      <div class="project-image" style="height: 300px; font-size: 2rem;">
+        <!-- Placeholder pour diagramme - à remplacer -->
+        <img src="images/Diagramme%20de%20Classe%20UML.png" alt="Diagramme de classes">
+      </div>
+
+      <h3>Ce que j'ai appris</h3>
+      <ul>
+        <li>Créer une interface fluide et intuitive avec JavaFX</li>
+        <li>Traduire des exigences fonctionnelles en modèles UML</li>
+        <li>Utiliser les exceptions pour gérer les erreurs utilisateurs</li>
+        <li>Protéger les mots de passe avec SHA-256</li>
+        <li>Penser l'expérience utilisateur dès la conception</li>
+      </ul>
+
+      <h3>Auteurs</h3>
+      <p>Assia AIT TALEB & Hoda DOUBLI<br>
+      GM3 - INSA Rouen Normandie</p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a fait comprendre que <span class="highlight">le code n'est qu'une partie de l'équation.</span> L'interface, l'expérience utilisateur, la clarté des interactions... tout compte. Et JavaFX m'a permis de créer quelque chose de visuellement agréable et fonctionnel. Un bon équilibre entre technique et design.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-
-

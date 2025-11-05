@@ -3,206 +3,513 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projet – Labyrinthes en C</title>
+  <title>Simulation de Labyrinthes - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
 
-    header h1 {
-      color: white;
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
 
-    footer {
-      background-color: #0a192f;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-    }
-
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    h1, h2 {
-      color: #0a192f;
-    }
-
-    ul, table {
-      margin-top: 1rem;
-    }
-
-    table {
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
       width: 100%;
-      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
     }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    th {
-      background-color: #e0f2ff;
-    }
-
-    a {
-      color: #2563eb;
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
       text-decoration: none;
-      font-weight: bold;
     }
 
-    a:hover {
-      text-decoration: underline;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-github {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      border-color: var(--gris-fonce);
+    }
+
+    .btn-github:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44,62,80,0.25);
+    }
+
+    /* Image placeholder */
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background-color: var(--gris-clair);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Bouton retour */
+    .back-section {
+      text-align: center;
+      margin: 3rem 0;
     }
 
     .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
       text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #112240;
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
     }
 
-    .screenshot {
-      max-width: 100%;
-      margin: 1rem 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Simulation de Labyrinthes en C</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>Simulation de Labyrinthes</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Génération et résolution de labyrinthes en C</p>
+      <div class="project-meta">
+        <span>📅 Novembre 2023</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Binôme avec Hoda</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">C</span>
+        <span class="tech-tag">Backtracking</span>
+        <span class="tech-tag">Dijkstra</span>
+        <span class="tech-tag">Graphes</span>
+        <span class="tech-tag">Récursivité</span>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-github" href="https://github.com/A2SIA-AA/Labyrinthe" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+          Voir sur GitHub
+        </a>
+      </div>
+    </div>
   </header>
-  <main>
-    <h2>Auteurs</h2>
-    <p>Doubli Hoda & Assia AIT TALEB (GM3)<br>
-       Date : Novembre 2023</p>
 
-    <h2>1. Une aventure algorithmique</h2>
-    <p>Ce projet n’était pas un simple devoir technique, mais une immersion dans le monde fascinant des algorithmes. Avec Hoda, nous avons uni nos forces pour concevoir une application capable de générer et résoudre des labyrinthes - un défi qui s’est vite transformé en une belle aventure de logique et de patience.</p>
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Dans le monde des algorithmes</h2>
 
-    <p>Le vrai tournant ? Comprendre que tout reposait sur la récursivité. Nous étions souvent tentées de passer directement au code, mais cette fois, c’est sur papier que nous avons pris le temps de visualiser les étapes. Ce moment d’alignement entre nous deux a complètement débloqué la suite. C’était aussi une belle leçon : prendre du recul, discuter, schématiser... avant de coder.</p>
+        <p>
+          Ce projet n'était pas un simple devoir technique, mais une immersion dans le monde fascinant des algorithmes. Le vrai tournant ? Comprendre que <span class="highlight">tout reposait sur la récursivité.</span> Nous avons pris le temps de visualiser sur papier avant de coder. Ce moment d'alignement a tout débloqué.
+        </p>
 
-    <h2>2. Comment ça marche ?</h2>
-    <p>Imaginez une grille vide. Notre programme commence à y « creuser » un labyrinthe, en explorant chaque direction, en revenant en arrière si besoin, et en évitant les répétitions. Une fois le labyrinthe terminé, il ne reste plus qu’à le résoudre, comme une énigme logique.</p>
-    <p>Voici les étapes clés :</p>
-    <table>
-      <tr>
-        <th>Étape</th>
-        <th>Algorithme</th>
-        <th>Rôle</th>
-      </tr>
-      <tr>
-        <td>Génération</td>
-        <td>Backtracking</td>
-        <td>Exploration en profondeur, récursive</td>
-      </tr>
-      <tr>
-        <td>Génération</td>
-        <td>Division récursive</td>
-        <td>Division de la grille en sous-espaces, puis connexion</td>
-      </tr>
-      <tr>
-        <td>Résolution</td>
-        <td>Backtracking</td>
-        <td>Marche jusqu’à la sortie en explorant toutes les voies</td>
-      </tr>
-      <tr>
-        <td>Résolution</td>
-        <td>Dijkstra</td>
-        <td>Calcule le plus court chemin avec priorité au coût</td>
-      </tr>
-    </table>
+        <p>
+          L'objectif était double : <span class="highlight">générer des labyrinthes aléatoires</span> parfaits (chaque case accessible, un seul chemin entre deux points) et <span class="highlight">trouver le plus court chemin</span> de l'entrée à la sortie.
+        </p>
 
-    <h2>3. Compilation & exécution</h2>
-    <p>Pour compiler et exécuter rapidement notre application :</p>
-    <pre>
-# À la racine du projet
-gcc main.c -o mon_appli
-./mon_appli
-    </pre>
+        <div class="anecdote">
+          <p>
+            💡 <strong>L'eurêka de la récursivité :</strong> Au début, on avait du mal à visualiser comment générer un labyrinthe. Puis Hoda a proposé qu'on dessine sur papier le processus de backtracking : partir d'une case, explorer les voisins non visités, reculer si on est bloqué... Et soudain, tout est devenu clair. La récursivité n'était plus une abstraction, mais un mouvement naturel : avancer, explorer, revenir. C'était comme une danse algorithmique.
+          </p>
+        </div>
 
-    <h2>4. Interface console</h2>
-    <ul>
-      <li>Choix du mode de génération</li>
-      <li>Choix du mode de résolution</li>
-    </ul>
-    <p>Le résultat : une représentation ASCII du labyrinthe généré, puis une version annotée du chemin trouvé.</p>
+        <p>
+          Pour la génération, on a utilisé <span class="highlight">le backtracking récursif</span>. Pour la résolution, on a implémenté <span class="highlight">l'algorithme de Dijkstra</span> pour garantir le chemin optimal. Voir le labyrinthe se construire case par case, puis le chemin apparaître en couleur... c'était magique.
+        </p>
 
-    <h2>5. Quelques visuels</h2>
-    <p>Labyrinthe généré :</p>
-    <img src="images/lab_genere.png" alt="Labyrinthe généré" class="screenshot">
-    <p>Labyrinthe résolu :</p>
-    <img src="images/lab_resolu.png" alt="Labyrinthe résolu" class="screenshot">
+        <p>
+          Ce projet m'a appris que les algorithmes ne sont pas juste du code. Ce sont des <span class="highlight">concepts vivants</span> qui résolvent des problèmes élégamment. Et quand on comprend vraiment la logique derrière, l'implémentation devient presque naturelle.
+        </p>
 
-    <h2>6. Performances</h2>
-    <p>Nous avons testé plusieurs tailles et comparé les temps d’exécution :</p>
-    <table>
-      <tr>
-        <th>Taille</th>
-        <th>Gén. Backtracking</th>
-        <th>Gén. Division</th>
-        <th>Rés. Backtracking</th>
-        <th>Rés. Dijkstra</th>
-      </tr>
-      <tr>
-        <td>20 × 20</td>
-        <td>0,00019 s</td>
-        <td>≈ 0 s</td>
-        <td>0,00006 s</td>
-        <td>0,00015 s</td>
-      </tr>
-      <tr>
-        <td>30 × 40</td>
-        <td>0,00038 s</td>
-        <td>0,00023 s</td>
-        <td>0,00018 s</td>
-        <td>0,00033 s</td>
-      </tr>
-    </table>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🧠 Compréhension de la récursivité :</span> Maîtriser le backtracking et gérer correctement les appels récursifs sans déborder la pile.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔗 Représentation du graphe :</span> Modéliser le labyrinthe comme un graphe avec des listes d'adjacence.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎨 Gestion de la mémoire en C :</span> Allouer/libérer dynamiquement les structures, éviter les fuites mémoire.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔍 Dijkstra :</span> Implémenter correctement l'algorithme avec une file de priorité pour optimiser la recherche.</li>
+        </ul>
 
-    <h2>7. Inspirations</h2>
-    <ul>
-      <li>Articles sur les générateurs de labyrinthes</li>
-      <li>Support de cours sur les graphes et récursivité</li>
-      <li>Ressources officielles sur l’algorithme de Dijkstra</li>
-    </ul>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔄 Récursivité et backtracking :</span> Maîtriser les appels récursifs, gérer l'état et les retours arrière.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 Théorie des graphes :</span> Représenter des structures complexes, parcourir des graphes, trouver des chemins.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⚙️ Programmation en C :</span> Gestion manuelle de la mémoire, pointeurs, structures de données.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🧩 Algorithmes classiques :</span> Implémenter Dijkstra, comprendre les algorithmes de parcours (DFS, BFS).</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Pensée algorithmique :</span> Décomposer un problème complexe en étapes simples et répétables.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <h2>Lien GitHub</h2>
-    <p>
-      <a href="https://github.com/A2SIA-AA/Labyrinthe.git" target="_blank">Voir le projet sur GitHub</a>
-    </p>
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
 
-    <a href="projets.html" class="back-button">← Retour aux projets</a>
-  </main>
+      <h2>Fonctionnement technique</h2>
 
+      <div class="project-image">
+        <img src="images/labyrinthe.jpg" alt="Labyrinthe généré">
+      </div>
+
+      <h3>Génération du labyrinthe</h3>
+      <p>
+        Nous utilisons l'algorithme de <strong>backtracking récursif</strong> (Recursive Backtracker) :
+      </p>
+      <ul>
+        <li>Partir d'une case de départ</li>
+        <li>Marquer la case comme visitée</li>
+        <li>Choisir aléatoirement un voisin non visité</li>
+        <li>Créer un passage vers ce voisin</li>
+        <li>Appeler récursivement l'algorithme sur ce voisin</li>
+        <li>Si aucun voisin disponible, revenir en arrière (backtrack)</li>
+      </ul>
+      <p>
+        Cet algorithme garantit un labyrinthe <strong>parfait</strong> : toutes les cases sont accessibles et il existe un seul chemin entre deux cases.
+      </p>
+
+      <h3>Résolution du labyrinthe</h3>
+      <p>
+        Nous implémentons l'algorithme de <strong>Dijkstra</strong> pour trouver le plus court chemin de l'entrée à la sortie :
+      </p>
+      <ul>
+        <li>Initialiser toutes les distances à l'infini sauf l'entrée (distance 0)</li>
+        <li>Utiliser une file de priorité pour explorer les cases par ordre de distance croissante</li>
+        <li>Mettre à jour les distances des voisins</li>
+        <li>Reconstruire le chemin une fois la sortie atteinte</li>
+      </ul>
+
+      <h3>Visualisation</h3>
+      <div class="project-image" style="height: 300px;">
+        <img src="images/lab_genere.png" alt="Labyrinthe généré">
+      </div>
+      <p style="text-align: center; font-style: italic;">Labyrinthe généré</p>
+
+      <div class="project-image" style="height: 300px;">
+        <img src="images/lab_resolu.png" alt="Labyrinthe résolu">
+      </div>
+      <p style="text-align: center; font-style: italic;">Labyrinthe résolu avec le plus court chemin en rouge</p>
+
+      <h3>Technologies utilisées</h3>
+      <ul>
+        <li><strong>C</strong> - langage principal</li>
+        <li><strong>Structures de données</strong> - graphes, listes, files de priorité</li>
+        <li><strong>Algorithmes</strong> - backtracking, Dijkstra, DFS</li>
+      </ul>
+
+      <h3>Auteurs</h3>
+      <p>Assia AIT TALEB & Hoda DOUBLI<br>
+      GM3 - INSA Rouen Normandie</p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a fait comprendre que <span class="highlight">les algorithmes sont des concepts vivants.</span> La récursivité, le backtracking, Dijkstra... ce ne sont pas que des formules théoriques. Ce sont des outils puissants qui, une fois maîtrisés, permettent de résoudre des problèmes complexes avec élégance. Et surtout, j'ai appris à visualiser avant de coder.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-

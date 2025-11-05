@@ -3,140 +3,538 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projet - JHAL-AUCTION</title>
+  <title>JHAL-AUCTION - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
-    header h1 {
-      color: white;
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
-    main {
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
+    }
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
       max-width: 900px;
-      margin: auto;
-      padding: 2rem;
+      margin: 0 auto;
     }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
     h2 {
-      color: #0a192f;
-      margin-top: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
     }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
+
     th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
+      border: 1px solid var(--bleu-clair);
+      padding: 1rem;
       text-align: left;
     }
+
     th {
-      background-color: #e0f2ff;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      font-weight: 600;
     }
-    a {
-      color: #2563eb;
-      font-weight: bold;
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
       text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      border: 2px solid transparent;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .btn-github {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      border-color: var(--gris-fonce);
     }
-    .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
-      text-decoration: none;
+
+    .btn-github:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44,62,80,0.25);
     }
-    .back-button:hover {
-      background-color: #112240;
+
+    /* Image placeholder */
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background-color: var(--gris-clair);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-    .screenshot {
-      max-width: 100%;
-      border-radius: 5px;
-      margin: 1rem 0;
-      border: 1px solid #ccc;
+
+    .project-image img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
     }
-    footer {
-      background-color: #0a192f;
-      color: white;
+
+    /* Bouton retour */
+    .back-section {
       text-align: center;
-      padding: 1rem;
+      margin: 3rem 0;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
       margin-top: 4rem;
-      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>JHAL-AUCTION - Salle des ventes en Java</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>JHAL-AUCTION</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Salle des ventes aux enchères en Java</p>
+      <div class="project-meta">
+        <span>📅 Octobre - Décembre 2024</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Équipe de 4</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">JavaFX</span>
+        <span class="tech-tag">UDP</span>
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">SHA-256</span>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-github" href="https://github.com/A2SIA-AA/JhalAuction" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+          Voir sur GitHub
+        </a>
+      </div>
+    </div>
   </header>
-  <main>
-    <h2>Un semestre d’enchères et de défis</h2>
-    <p>Ce projet, c’est bien plus qu’une simple salle des ventes. Pendant un semestre entier, notre équipe a jonglé entre modélisation, conception, prises de décisions… et parfois de vraies divergences d’opinion.</p>
 
-    <p>Tout a commencé avec une idée simple : créer une plateforme d’enchères en ligne, avec des utilisateurs, des véhicules, et un commissaire priseur. Facile à dire ! Mais dès la phase d’implémentation, nous avons réalisé que notre première modélisation ne couvrait pas tous les cas... Il a fallu revenir à la planche à dessin, discuter, négocier, et trouver un terrain d’entente.</p>
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Un semestre d'enchères et de défis</h2>
 
-    <p>De mon côté, la connexion en temps réel entre les messages réseau et l’interface graphique fut un vrai casse-tête. Il a fallu synchroniser JavaFX avec UDP et des threads. Mais grâce à l’aide du groupe, on a pu tout faire marcher. C’est ce genre de complexité qu’on aime... après l’avoir résolue ! </p>
+        <p>
+          Ce projet, c'est bien plus qu'une simple salle des ventes. <span class="highlight">Pendant un semestre entier</span>, notre équipe de quatre a jonglé entre modélisation, conception, implémentation... et parfois de vraies divergences d'opinion. C'était intense, mais tellement formateur.
+        </p>
 
-    <img src="images/jhal_auction.png" alt="Interface des enchères" class="screenshot">
+        <p>
+          Tout a commencé avec une idée simple : créer une plateforme d'enchères en ligne, avec des utilisateurs, des véhicules, et un commissaire priseur. Facile à dire ! Mais dès la phase d'implémentation, <span class="highlight">nous avons réalisé que notre première modélisation ne couvrait pas tous les cas...</span> Il a fallu revenir à la planche à dessin, discuter, négocier, et trouver un terrain d'entente.
+        </p>
 
-    <h2>Auteurs</h2>
-    <p>Assia AIT TALEB, Loraine DICKO, Hoda DOUBLI, Joëlle FARHAT<br>
-    Date : Décembre 2024<br>
-    GM4 - INSA Rouen</p>
+        <div class="anecdote">
+          <p>
+            💡 <strong>Le casse-tête réseau :</strong> De mon côté, la connexion en temps réel entre les messages réseau et l'interface graphique fut un vrai challenge. Il a fallu synchroniser JavaFX avec UDP et des threads. Quand un utilisateur enchérit, il faut que tous les autres voient la mise à jour instantanément. Ça paraît simple, mais entre la sérialisation des messages, la gestion du multicast UDP, et le rafraîchissement de l'interface sans bloquer l'application... c'était technique. Mais grâce à l'aide du groupe, on a pu tout faire marcher. C'est ce genre de complexité qu'on aime... après l'avoir résolue !
+          </p>
+        </div>
 
-    <h2>Objectif</h2>
-    <p>Créer une salle des ventes interactive où les utilisateurs peuvent s’inscrire, consulter les offres disponibles et participer à des enchères en direct.</p>
+        <p>
+          Ce projet m'a appris quelque chose d'essentiel : <span class="highlight">travailler en équipe, ce n'est pas toujours être d'accord.</span> C'est savoir écouter, argumenter, faire des compromis. Et au final, on a livré un système qui fonctionne : enchères en temps réel, base de données SQLite pour la persistence, interface JavaFX fluide, et sécurité avec SHA-256 pour les mots de passe.
+        </p>
 
-    <h2>Structure du projet</h2>
-    <table>
-      <tr><th>Dossier / fichier</th><th>Fonction</th></tr>
-      <tr><td>Communication/</td><td>Messages UDP (sérialisation, écoute, diffusion)</td></tr>
-      <tr><td>ServeurEnchere.java</td><td>Serveur UDP, communication réseau + base SQLite</td></tr>
-      <tr><td>Utilisateur.java</td><td>Client (inscription, enchères, réclamations)</td></tr>
-      <tr><td>Commissaire.java</td><td>Ajout de véhicules, animation des enchères</td></tr>
-      <tr><td>DataBase.java</td><td>Gestion des tables (offres, utilisateurs...)</td></tr>
-      <tr><td>FXML + Controller</td><td>Interface graphique JavaFX (menus, offres, réclamations)</td></tr>
-    </table>
+        <p>
+          Si je devais résumer ce semestre : beaucoup de café, quelques prises de tête, mais surtout une vraie fierté collective quand on a vu notre salle des ventes tourner en direct avec plusieurs clients connectés. Mission accomplie.
+        </p>
 
-    <h2>Fonctionnalités techniques</h2>
-    <ul>
-      <li>UDP multicast pour la synchronisation en temps réel entre clients</li>
-      <li>JavaFX pour une interface fluide</li>
-      <li>Base SQLite pour la persistance des utilisateurs, offres, historiques</li>
-      <li>SHA-256 pour le hachage des mots de passe</li>
-      <li>Requêtes asynchrones pour l’interface</li>
-    </ul>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⚡ Synchronisation réseau :</span> Gérer les enchères en temps réel via UDP tout en maintenant la cohérence des données entre plusieurs clients.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔄 Modélisation évolutive :</span> Notre première architecture ne tenait pas la route. Il a fallu revenir en arrière et repenser le tout.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Gestion des threads :</span> Faire cohabiter l'interface JavaFX avec les threads réseau sans bloquer l'application.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">👥 Coordination d'équipe :</span> Quatre personnes avec des visions différentes. Apprendre à trancher tout en respectant chacun.</li>
+        </ul>
 
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📡 Communication réseau :</span> Maîtriser UDP multicast, la sérialisation d'objets Java, et la gestion de messages asynchrones.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎨 JavaFX avancé :</span> Synchroniser l'UI avec des événements réseau, utiliser Platform.runLater() pour les mises à jour thread-safe.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔐 Sécurité :</span> Implémenter un système de hachage SHA-256 pour protéger les mots de passe utilisateurs.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">💡 Architecture logicielle :</span> L'importance d'une bonne modélisation initiale. Refaire, c'est normal, mais anticiper, c'est mieux.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🤝 Travail d'équipe :</span> Savoir défendre ses idées, accepter la critique, et construire collectivement une solution robuste.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <h2>Captures d’écran et diagrammes</h2>
-    <img src="images/enchere.png" alt="Liste des enchères en cours" class="screenshot">
-    <img src="images/usecase_jhalauction.png" alt="Diagramme de cas d'utilisation" class="screenshot">
-    <img src="images/classe_jhalauction.png" alt="Diagramme de classe" class="screenshot">
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
 
-    <h2>Lien GitHub</h2>
-    <p>
-      <a href="https://github.com/A2SIA-AA/JhalAuction.git" target="_blank">Voir le projet sur GitHub</a>
-    </p>
+      <h2>Fonctionnement technique</h2>
 
-    <a href="projets.html" class="back-button">← Retour aux projets</a>
-  </main>
+      <div class="project-image">
+        <img src="images/enchere.png" alt="JHAL Auction Interface" style="object-fit: contain;">
+      </div>
 
+      <h3>Objectif</h3>
+      <p>
+        Créer une salle des ventes interactive où les utilisateurs peuvent s'inscrire, consulter les offres disponibles et participer à des enchères en direct.
+      </p>
+
+      <h3>Structure du projet</h3>
+      <table>
+        <tr>
+          <th>Dossier / fichier</th>
+          <th>Fonction</th>
+        </tr>
+        <tr>
+          <td>Communication/</td>
+          <td>Messages UDP (sérialisation, écoute, diffusion)</td>
+        </tr>
+        <tr>
+          <td>ServeurEnchere.java</td>
+          <td>Serveur UDP, communication réseau + base SQLite</td>
+        </tr>
+        <tr>
+          <td>Utilisateur.java</td>
+          <td>Client (inscription, enchères, réclamations)</td>
+        </tr>
+        <tr>
+          <td>Commissaire.java</td>
+          <td>Ajout de véhicules, animation des enchères</td>
+        </tr>
+        <tr>
+          <td>DataBase.java</td>
+          <td>Gestion des tables (offres, utilisateurs...)</td>
+        </tr>
+        <tr>
+          <td>FXML + Controller</td>
+          <td>Interface graphique JavaFX (menus, offres, réclamations)</td>
+        </tr>
+      </table>
+
+      <h3>Fonctionnalités techniques</h3>
+      <ul>
+        <li>UDP multicast pour la synchronisation en temps réel entre clients</li>
+        <li>JavaFX pour une interface fluide</li>
+        <li>Base SQLite pour la persistance des utilisateurs, offres, historiques</li>
+        <li>SHA-256 pour le hachage des mots de passe</li>
+        <li>Requêtes asynchrones pour l'interface</li>
+      </ul>
+
+      <div class="project-image" style="height: 300px; font-size: 2rem;">
+        <img src="images/classe_jhalauction.png" alt="Diagramme de classes JHAL Auction" style="object-fit: contain;">
+      </div>
+
+      <h3>Auteurs</h3>
+      <p>Assia AIT TALEB, Loraine DICKO, Hoda DOUBLI, Joëlle FARHAT<br>
+      Date : Décembre 2024<br>
+      GM4 - INSA Rouen</p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        JHAL-Auction m'a appris à <span class="highlight">gérer la complexité d'un projet en équipe sur la durée</span>. Entre la modélisation UML, la communication réseau, la gestion concurrente des threads, et l'interface graphique, chaque brique technique était un défi. Mais surtout, j'ai compris l'importance de revenir sur ses choix quand ils ne fonctionnent pas, et de construire collectivement une solution robuste.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-

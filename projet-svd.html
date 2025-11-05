@@ -3,187 +3,508 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVD Image Compression</title>
+  <title>SVD Image Compression - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
-    header h1 {
-      color: white;
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-    }
-    footer {
-      background-color: #0a192f;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-    }
-    h1, h2 {
-      color: #0a192f;
-    }
-    table {
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
     }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    th {
-      background-color: #e0f2ff;
-    }
-    pre {
-      background: #e0f2ff;
-      padding: 1rem;
-      overflow: auto;
-    }
-    a {
-      color: #2563eb;
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
       text-decoration: none;
-      font-weight: bold;
     }
-    a:hover {
-      text-decoration: underline;
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
     }
-    .back-button {
-      display: inline-block;
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
       margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
-      text-decoration: none;
     }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-github {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      border-color: var(--gris-fonce);
+    }
+
+    .btn-github:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44,62,80,0.25);
+    }
+
+    /* Image placeholder */
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background-color: var(--gris-clair);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Bouton retour */
+    .back-section {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
     .back-button:hover {
-      background-color: #112240;
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // LENA
-    const kLena = document.getElementById("kLena");
-    const imgLena = document.getElementById("imgLena");
-
-    kLena.addEventListener("change", function () {
-      const k = this.value;
-      imgLena.src = `images/lena_k${k}.png`;
-    });
-
-    // TIGRE
-    const kTigre = document.getElementById("kTigre");
-    const imgTigre = document.getElementById("imgTigre");
-
-    kTigre.addEventListener("change", function () {
-      const k = this.value;
-      imgTigre.src = `images/tigre_k${k}.png`;
-    });
-  });
-</script>
-
-
 <body>
-  <header>
-    <h1>SVD-Image-Compression</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>SVD Image Compression</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Compression d'images par décomposition en valeurs singulières</p>
+      <div class="project-meta">
+        <span>📅 Février 2024</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Binôme avec Hoda</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">NumPy</span>
+        <span class="tech-tag">SVD</span>
+        <span class="tech-tag">Matplotlib</span>
+        <span class="tech-tag">Algèbre linéaire</span>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-github" href="https://github.com/A2SIA-AA/Compression_Image" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+          Voir sur GitHub
+        </a>
+      </div>
+    </div>
   </header>
-  <main>
-    <h2>Un projet qui voit plus clair</h2>
-    <p>Tout est parti d'une question simple : comment réduire la taille d'une image sans en perdre l’essence ? Avec Hoda, on a plongé dans le monde des matrices pour trouver une réponse élégante et mathématiquement rigoureuse : la <strong>décomposition en valeurs singulières</strong>.</p>
 
-    <p>Le cœur du projet repose sur l’idée que chaque image peut être décomposée en une somme de motifs élémentaires. En ne gardant que les plus significatifs, on parvient à reconstruire l’essentiel... avec beaucoup moins de données. C’est un peu comme résumer un roman sans en trahir l’histoire.</p>
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Quand les maths rencontrent l'image</h2>
 
-    <h2>Qui sommes-nous ?</h2>
-    <p><strong>Auteurs :</strong> Doubli Hoda & Assia AIT TALEB – INSA Rouen, GM3</p>
-    <p><strong>Date :</strong> Février 2024</p>
+        <p>
+          Comment réduire la taille d'une image sans en perdre l'essence ? C'est la question qui a guidé ce projet. Avec Hoda, on a plongé dans les matrices, les vecteurs propres, et la <span class="highlight">décomposition en valeurs singulières (SVD)</span> pour trouver une réponse élégante.
+        </p>
 
-    <h2>1. Ce que contient le projet</h2>
-    <table>
-      <tr><th>Fichier / Dossier</th><th>Description</th></tr>
-      <tr><td>algo.py</td><td>Nos fonctions maison pour la SVD, sans bibliothèque externe</td></tr>
-      <tr><td>main.py</td><td>Script de lancement CLI : choix d'image et compression</td></tr>
-      <tr><td>images</td><td>Images tests (lena, mandrill, tigre)</td></tr>
-      <tr><td>report_SVD_Compression.pdf</td><td>Rapport complet avec théorie, démonstrations et résultats</td></tr>
-      <tr><td>README.md</td><td>Résumé rapide du projet</td></tr>
-    </table>
+        <p>
+          L'idée derrière la SVD est fascinante : <span class="highlight">toute image peut être décomposée en trois matrices</span> qui, combinées, reconstruisent l'image originale. Mais en ne gardant que les valeurs singulières les plus importantes, on peut compresser l'image tout en conservant l'essentiel de l'information visuelle.
+        </p>
 
-    <h2>2. Comprendre la magie de la SVD</h2>
-    <ul>
-      <li>SVD : toute matrice A peut s’écrire comme A = UΣVᵀ</li>
-      <li>Tronquer Σ revient à « compresser » sans trop perdre en qualité</li>
-      <li>Le théorème d’Eckart-Young garantit la meilleure approximation possible</li>
-    </ul>
+        <div class="anecdote">
+          <p>
+            💡 <strong>THE moment :</strong> Quand on a visualisé pour la première fois l'image reconstruite avec seulement 10% des valeurs singulières, et qu'on voyait déjà la structure générale apparaître. Puis en augmentant progressivement ce pourcentage, voir l'image se préciser... c'était magique ! On voyait littéralement les mathématiques transformer des données.
+          </p>
+        </div>
 
-    <h2>3. Comment l’utiliser</h2>
-    <pre><code>python main.py</code></pre>
-    <p>Le programme vous demandera de choisir une image et un rang de compression <code>k</code>. Ensuite, il génère l’image compressée correspondante.</p>
-    
-<h2>Visualisation interactive de la compression</h2>
-<p>Comparez deux images compressées avec différents rangs <code>k</code> :</p>
+        <p>
+          On a testé plusieurs images : des visages, des paysages, des animaux. À chaque fois, on jouait avec le paramètre k (le nombre de valeurs singulières conservées) pour trouver <span class="highlight">le meilleur compromis entre taille et qualité</span>.
+        </p>
 
-<div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
+        <p>
+          Ce projet m'a fait comprendre que les mathématiques ne sont pas abstraites. Elles sont un outil puissant pour résoudre des problèmes concrets. La SVD est utilisée partout : compression d'images, recommandation de contenus, réduction de dimensions... Mais la voir fonctionner de nos propres mains, c'était une révélation.
+        </p>
 
-  <!-- Bloc LENA -->
-  <div style="text-align: center;">
-    <h3>Lena</h3>
-    <img id="imgLena" src="images/lena_k10.png" alt="Lena compressée" style="max-width: 300px; border-radius: 5px;">
-    <br>
-    <select id="kLena" style="margin-top: 1rem; padding: 0.5rem; font-size: 1rem;">
-      <option value="10">k = 10</option>
-      <option value="100">k = 100</option>
-      <option value="255">k = 255</option>
-    </select>
-  </div>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🧮 Compréhension mathématique :</span> Maîtriser la théorie derrière la SVD, comprendre le rôle des valeurs singulières et des vecteurs propres.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 Manipulation de matrices :</span> Gérer des matrices de grande dimension (images haute résolution), optimiser les calculs NumPy.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎨 Images en couleur :</span> Appliquer la SVD sur les trois canaux RGB séparément et recomposer l'image finale.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⚖️ Compromis qualité/taille :</span> Trouver le bon nombre k de valeurs singulières pour chaque type d'image.</li>
+        </ul>
 
-  <!-- Bloc TIGRE -->
-  <div style="text-align: center;">
-    <h3>Tigre</h3>
-    <img id="imgTigre" src="images/tigre_k10.png" alt="Tigre compressé" style="width: 340px; "border-radius: 5px;">
-    <br>
-    <select id="kTigre" style="margin-top: 1rem; padding: 0.5rem; font-size: 1rem;">
-      <option value="10">k = 10</option>
-      <option value="100">k = 100</option>
-      <option value="360">k = 360</option>
-    </select>
-  </div>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📐 Algèbre linéaire appliquée :</span> Passer de la théorie abstraite à l'implémentation concrète de la SVD.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🐍 NumPy avancé :</span> Manipuler des matrices multidimensionnelles, utiliser np.linalg.svd(), optimiser les performances.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 Visualisation :</span> Utiliser Matplotlib pour comparer visuellement les images originales et compressées.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔍 Analyse de données :</span> Comprendre comment l'information est répartie dans les valeurs singulières.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">💡 Pensée critique :</span> Évaluer objectivement les résultats, mesurer le taux de compression vs la qualité perceptuelle.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
 
-    <h2>5. Ce qu'on a appris</h2>
-    <ul>
-      <li>La SVD, ce n’est pas qu’une formule : c’est un outil puissant pour la compression</li>
-      <li>Nos propres fonctions SVD, testées contre NumPy, ont bien tenu le choc</li>
-      <li>Choisir <code>k</code> est un équilibre entre qualité visuelle et gain mémoire</li>
-    </ul>
+      <h2>Fonctionnement technique</h2>
 
-    <h2>Lien GitHub</h2>
-    <p>
-      <a href="https://github.com/A2SIA-AA/Compression_Image.git" target="_blank">Voir le projet sur GitHub</a>
-    </p>
+      <div class="project-image">
+        <img src="images/svd_icon.jpg" alt="SVD Compression">
+      </div>
 
-    <a href="projets.html" class="back-button">← Retour aux projets</a>
-  </main>
+      <h3>Principe de la SVD</h3>
+      <p>
+        La <strong>Singular Value Decomposition</strong> décompose une matrice A (notre image) en trois matrices :
+      </p>
+      <ul>
+        <li><strong>U</strong> : matrice orthogonale contenant les vecteurs propres de AA^T</li>
+        <li><strong>Σ (Sigma)</strong> : matrice diagonale des valeurs singulières (triées par ordre décroissant)</li>
+        <li><strong>V^T</strong> : matrice orthogonale contenant les vecteurs propres de A^TA</li>
+      </ul>
+      <p>
+        Formule : <strong>A = U × Σ × V^T</strong>
+      </p>
 
+      <h3>Compression</h3>
+      <p>
+        En ne gardant que les <strong>k premières valeurs singulières</strong> (les plus grandes), on obtient une approximation de l'image originale avec une taille réduite.
+      </p>
+      <p>
+        Plus k est grand, plus l'image est fidèle à l'originale. Plus k est petit, plus la compression est forte.
+      </p>
+
+      <h3>Exemples de résultats</h3>
+      <div class="project-image" style="height: 300px;">
+        <img src="images/lena_k10.png" alt="Lena compressée k=10">
+      </div>
+      <p style="text-align: center; font-style: italic;">Image compressée avec k=10 valeurs singulières</p>
+
+      <div class="project-image" style="height: 300px;">
+        <img src="images/lena_k100.png" alt="Lena compressée k=100">
+      </div>
+      <p style="text-align: center; font-style: italic;">Image compressée avec k=100 valeurs singulières</p>
+
+      <h3>Technologies utilisées</h3>
+      <ul>
+        <li><strong>Python</strong> - langage principal</li>
+        <li><strong>NumPy</strong> - calcul matriciel et SVD</li>
+        <li><strong>Matplotlib</strong> - visualisation des résultats</li>
+        <li><strong>PIL/Pillow</strong> - manipulation d'images</li>
+      </ul>
+
+      <h3>Auteurs</h3>
+      <p>Assia AIT TALEB & Hoda DOUBLI<br>
+      GM3 - INSA Rouen Normandie</p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a fait comprendre que <span class="highlight">les mathématiques sont un langage pour résoudre des problèmes réels.</span> La SVD n'est pas qu'une formule abstraite : c'est un outil puissant utilisé dans la compression, le machine learning, la recommandation... Voir cette théorie prendre vie dans notre code a été une expérience marquante.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-

@@ -3,149 +3,659 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio d'Assia</title>
+  <title>Assia AIT TALEB - Ingénieure IA & Dev</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
+    }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
-    }
-
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    header h1 {
-      color: white;
-      margin: 0;
-    }
-
-    footer {
-      background-color: #0a192f;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-    }
-
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    h2 {
-      margin-top: 1rem;
-      font-size: 2rem;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      color: #2563eb;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      font-size: 1.2rem;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
       line-height: 1.6;
     }
 
-    .contact-links {
-      margin-top: 2rem;
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
     }
 
-    .contact-links a {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 0.5rem 1rem;
-      color: white;
-      background-color: #2563eb;
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
       text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
     }
 
-    .contact-links a:hover {
-      background-color: #1d4ed8;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
     }
 
-    .btn-projets {
-      display: inline-block;
-      margin-top: 3rem;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      background-color: #0a192f;
-      color: #64ffda;
+    nav a {
+      color: var(--gris-fonce);
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      animation: pulse 2s infinite;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
     }
 
-    .btn-projets:hover {
-      background-color: #112240;
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    nav a:hover {
+      color: var(--bleu-fonce);
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.6); }
-      70% { box-shadow: 0 0 0 10px rgba(100, 255, 218, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+    nav a:hover::after {
+      width: 100%;
     }
 
-    .intro-box {
-      background-color: #e0f2ff;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-top: 2rem;
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
     }
 
-    .profile-img {
-      max-width: 180px;
-      border-radius: 50%;
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
       margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .hero .tagline {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 2rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero .subtitle {
+      font-size: 1.1rem;
+      color: var(--gris-fonce);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: var(--bleu-pastel);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .cta-button:hover {
+      background: var(--bleu-fonce);
+      color: var(--blanc);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(90, 140, 163, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Container général */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--bleu-pastel);
+      border-radius: 2px;
+    }
+
+    /* Section Mon histoire */
+    .story {
+      background: var(--gris-clair);
+    }
+
+    .story-content {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--gris-fonce);
+    }
+
+    .story-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .story-content .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    /* Section Compétences */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skill-category {
+      background: var(--blanc);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(168, 213, 226, 0.3);
+      border-color: var(--bleu-pastel);
+    }
+
+    .skill-category h3 {
+      font-size: 1.3rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-category ul {
+      list-style: none;
+    }
+
+    .skill-category li {
+      padding: 0.5rem 0;
+      color: var(--gris-fonce);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .skill-category li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--bleu-pastel);
+      font-size: 1.2rem;
+    }
+
+    /* Section Projets Phares */
+    .projects {
+      background: var(--bleu-clair);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--blanc);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-color: var(--gris-clair);
+      border-radius: 10px;
+    }
+
+    .project-image img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      color: var(--gris-fonce);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card .date {
+      font-size: 0.9rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .project-card .excerpt {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gris-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+      padding: 0.4rem 0.9rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .project-link {
+      display: inline-block;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      color: var(--bleu-pastel);
+      transform: translateX(5px);
+    }
+
+    .project-link::after {
+      content: ' →';
+    }
+
+    /* Section Contact */
+    .contact {
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .contact-link svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      opacity: 0.9;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero .tagline {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .projects-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Bienvenue sur mon portfolio</h1>
-  </header>
 
-  <section>
-
-    <h2>Assia AIT TALEB</h2>
-    <h3>« Mon moteur : automatiser, structurer, et valoriser grâce à l’IA.  »</h3>
-
-    <div class="intro-box">
-    <p>Passionnée par l’IA et le code, je transforme les idées en solutions concrètes. J’aime quand un script automatise une tâche complexe, quand un algorithme rend les données utiles, ou quand un projet touche à quelque chose de réel. Mon objectif : créer des outils intelligents, élégants et efficaces, avec curiosité et exigence.</p>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#histoire">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    
+  </nav>
 
-    <div class="contact-links">
-      <a href="mailto:assia.aittaleb1@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/assia-ait-taleb" target="_blank">LinkedIn</a>
-      <a href="https://github.com/A2SIA-AA" target="_blank">GitHub</a>
+  <!-- Hero Section -->
+  <section class="hero" id="accueil">
+    <div class="container">
+      <h1>Assia AIT TALEB</h1>
+      <p class="tagline">Mon moteur : automatiser, structurer, et valoriser grâce à l'IA.</p>
+      <p class="subtitle">Étudiante ingénieure en Génie Mathématiques • Passionnée par l'IA et le développement</p>
+      <a href="#projets" class="cta-button">Découvrir mes projets</a>
     </div>
-
-    <a class="btn-projets" href="projets.html">Voir mes projets</a>
   </section>
 
+  <!-- Section Mon Histoire -->
+<section class="story" id="histoire">
+  <div class="container">
+    <h2>Mon histoire</h2>
+    <div class="story-content">
+      <p>
+        Je n’ai pas découvert l’IA dans un cours ou dans un livre. Je l’ai découverte en construisant quelque chose de concret. Pendant mon stage à l’AMDIE, j’ai développé un chatbot RAG à partir de documents internes, étape par étape.
+      </p>
+      <p>
+        J’ai commencé par extraire les données, puis à les stocker dans une base vectorielle, à créer une API pour orchestrer le tout, avant de connecter le serveur MCP. Et un jour, tout s’est mis à fonctionner ensemble. Pas de moment spectaculaire, juste un écran, un terminal, et un <span class="highlight">“ça marche”</span> qui change tout.
+      </p>
+      <p>
+        C’est là que j’ai compris ce qui me motive : transformer une idée en une solution qui fonctionne vraiment, <span class="highlight">utile à quelqu’un</span>. Ce qui m’attire dans l’IA, ce n’est pas la technologie en soi, mais la façon dont elle permet de répondre à un besoin réel.
+      </p>
+      <p>
+        Aujourd’hui, je continue dans cette direction. Pour mon stage de fin d’études (mars 2026), je recherche un environnement où je peux apprendre, construire et livrer des projets qui <span class="highlight">mêlent développement et IA</span> - des projets concrets, qui ont du sens.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Section Compétences -->
+  <section class="skills" id="competences">
+    <div class="container">
+      <h2>Compétences</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>🤖 Intelligence Artificielle</h3>
+          <ul>
+            <li>Machine Learning</li>
+            <li>RAG & LLM</li>
+            <li>Systèmes Multi-agents</li>
+            <li>LangChain, ChromaDB</li>
+            <li>IA Explicable (XAI)</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>💻 Développement</h3>
+          <ul>
+            <li>Python (pandas, NumPy, Scikit-learn)</li>
+            <li>Java, C/C++</li>
+            <li>SQL, ChromaDB</li>
+            <li>Git & versionnage</li>
+            <li>JavaFX, Qt</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>📊 Analyse & Modélisation</h3>
+          <ul>
+            <li>Analyse numérique</li>
+            <li>Modélisation UML</li>
+            <li>Traitement du signal</li>
+            <li>Statistiques & probabilités</li>
+            <li>R, Matlab</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>✨ Soft Skills</h3>
+          <ul>
+            <li>Esprit d'équipe</li>
+            <li>Rigueur & perfectionnisme</li>
+            <li>Autonomie</li>
+            <li>Résolution de problèmes</li>
+            <li>Pédagogie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Projets Phares -->
+  <section class="projects" id="projets">
+    <div class="container">
+      <h2>Projets phares</h2>
+      <div class="projects-grid">
+
+        <!-- Projet 1 : Chatbot RAG -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+             <img src="images/interface_connexion.png" alt="Chatbot_AMDIE" class="image-small">
+
+          </div>
+          <div class="project-content">
+            <h3>Chatbot RAG Documentaire</h3>
+            <p class="date">Mai - Août 2025 • AMDIE</p>
+            <p class="excerpt">
+              Le projet qui a tout changé. Construire un chatbot capable de comprendre et d'interroger des documents, avec gestion des droits d'accès. Le moment où j'ai intégré le serveur MCP ? Inoubliable.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">RAG</span>
+              <span class="tech-tag">LangChain</span>
+              <span class="tech-tag">ChromaDB</span>
+            </div>
+            <a href="projet-chatbot.html" class="project-link">Lire l'histoire</a>
+          </div>
+        </div>
+
+        <!-- Projet 2 : JHAL-Auction -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/logo_jhal_auction.png" alt="Logo Jhal Auction" class="image-small">
+          </div>
+          <div class="project-content">
+            <h3>JHAL-AUCTION</h3>
+            <p class="date">Oct - Déc 2024 • INSA Rouen</p>
+            <p class="excerpt">
+              Un semestre entier à jongler entre modélisation, réseau UDP et JavaFX. Des désaccords, des revirements, mais au final une salle des ventes qui fonctionne en temps réel. Un vrai défi d'équipe.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">JavaFX</span>
+              <span class="tech-tag">UDP</span>
+              <span class="tech-tag">SQLite</span>
+            </div>
+            <a href="jhal-auction.html" class="project-link">Lire l'histoire</a>
+          </div>
+        </div>
+
+        <!-- Projet 3 : Covoiturage -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/covoiturage_item.jpg" alt="Covoiturage" class="image-small">
+          </div>
+          <div class="project-content">
+            <h3>Application de Covoiturage</h3>
+            <p class="date">Fév - Mai 2025 • INSA Rouen</p>
+            <p class="excerpt">
+              Six personnes, six visions différentes. Trouver un terrain d'entente n'a pas été simple, mais cette phase de réflexion collective a enrichi le projet. J'ai bossé sur le contrôleur et la console.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">Qt</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">UML</span>
+            </div>
+            <a href="projet-covoiturage.html" class="project-link">Lire l'histoire</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="projets.html" class="cta-button">Voir tous mes projets</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Restons en contact</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">Vous avez un projet, une opportunité de stage ou simplement envie d'échanger ?</p>
+      <div class="contact-links">
+        <a href="mailto:assia.aittaleb1@gmail.com" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          Email
+        </a>
+        <a href="https://www.linkedin.com/in/assia-ait-taleb" target="_blank" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/A2SIA-AA" target="_blank" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-

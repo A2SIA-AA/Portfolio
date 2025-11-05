@@ -3,148 +3,546 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Projets – Assia</title>
+  <title>Mes Projets – Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+      box-sizing: border-box;
     }
-    
-        footer {
-  background-color: #0a192f;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 4rem;
-  font-size: 0.9rem;
-}
 
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
+    }
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header de la page */
+    .page-header {
+      margin-top: 80px;
+      padding: 4rem 2rem 3rem;
       text-align: center;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
     }
 
-    header h1 {
-      color: white;
-    }
-
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    h2 {
-      color: #0a192f;
-      font-size: 2rem;
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
       margin-bottom: 1rem;
     }
 
-    .projet-card {
-      background-color: #e0f2ff;
-      border-left: 5px solid #2563eb;
-      padding: 1rem;
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--bleu-fonce);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section projets */
+    .projects-section {
+      padding: 4rem 0 5rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(168, 213, 226, 0.3);
+      border-color: var(--bleu-pastel);
+    }
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* toutes les cartes auront la même hauteur */
+}
+
+/* même hauteur d'image dans toutes les cartes */
+.project-image {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--gris-clair);
+  border-radius: 10px 10px 0 0;
+}
+
+.project-image img {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+
+    .project-card:hover .project-image {
+      transform: scale(1.05);
+    }
+
+    .project-content {
+  padding: 2rem;
+  flex-grow: 1; /* pousse le contenu pour uniformiser la hauteur */
+}
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      color: var(--gris-fonce);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-card .excerpt {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gris-fonce);
       margin-bottom: 1.5rem;
-      border-radius: 5px;
     }
 
-    .projet-card a {
-      color: #0a192f;
-      font-weight: bold;
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+      padding: 0.4rem 0.9rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .project-team {
+      font-size: 0.9rem;
+      color: var(--gris-fonce);
+      opacity: 0.8;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gris-clair);
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--bleu-fonce);
       text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
 
-    .projet-card a:hover {
-      text-decoration: underline;
+    .project-link:hover {
+      color: var(--bleu-pastel);
+      transform: translateX(5px);
     }
 
-    .auteurs {
-      font-size: 0.95rem;
-      margin-top: 0.5rem;
-      color: #333;
+    .project-link::after {
+      content: '→';
+      font-size: 1.2rem;
+    }
+
+    /* Bouton retour */
+    .back-section {
+      text-align: center;
+      margin: 3rem 0;
     }
 
     .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
       text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #112240;
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      opacity: 0.9;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .page-header p {
+        font-size: 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Mes projets</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header de la page -->
+  <header class="page-header">
+    <div class="container">
+      <h1>Mes Projets</h1>
+      <p>Une collection de défis relevés, d'algorithmes domptés et de problèmes résolus</p>
+    </div>
   </header>
 
-  <main>
-    <div class="projet-card">
-      <h2><a href="projet-chatbot.html">Chatbot RAG Documentaire</a></h2>
-      <p><strong>Date :</strong> Mai 2025 - Août 2025</p>
-      <p><strong>Contexte :</strong> Projet de stage chez AMDIE - Construction d’un chatbot capable de lire et interroger des documents multi-formats avec gestion des droits d’accès.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB</p>
-    </div>
+  <!-- Section projets -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-grid">
 
-    <div class="projet-card">
-      <h2><a href="projet-covoiturage.html">Application de Covoiturage en C++</a></h2>
-      <p><strong>Date :</strong> Février 2025 - Mai 2025</p>
-      <p><strong>Contexte :</strong> Projet académique - Développement d'une application console et graphique de gestion de covoiturage avec système d'utilisateurs et de trajets.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Hanane AMZIL, Loraine DICKO, Joëlle FARHAT, Chaimae OURRAOUI, Il-Hême YAYA</p>
-    </div>
-    
-        <div class="projet-card">
-      <h2><a href="jhal-auction.html">JHAL-AUCTION - Logiciel de ventes aux enchères Java</a></h2>
-      <p><strong>Date :</strong> Octobre 2024 - Décembre 2024</p>
-      <p><strong>Contexte :</strong> Projet de programmation orientée objet avancée - Développement d’un système de vente aux enchères simulé, avec réseau UDP, interface JavaFX et base SQLite.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Loraine DICKO, Doubli Hoda, Joëlle FARHAT</p>
-    </div>
+        <!-- Projet 1 : Chatbot RAG -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/interface_accueil.png" alt="Chatbot RAG">
+          </div>
+          <div class="project-content">
+            <h3>Chatbot RAG Documentaire</h3>
+            <div class="project-meta">
+              <span>📅 Mai - Août 2025</span>
+              <span>🏢 AMDIE</span>
+            </div>
+            <p class="excerpt">
+              Le projet qui a tout changé. Construire un chatbot capable de comprendre et d'interroger des documents, avec gestion des droits d'accès. Le moment où j'ai intégré le serveur MCP ? Inoubliable.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">RAG</span>
+              <span class="tech-tag">LangChain</span>
+              <span class="tech-tag">ChromaDB</span>
+              <span class="tech-tag">Gemini</span>
+            </div>
+            <p class="project-team">👤 Solo</p>
+            <a href="projet-chatbot.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
 
-    <div class="projet-card">
-      <h2><a href="projet-bibliotheque.html">La Bibliothèque d’Alexandrie - Application Java</a></h2>
-      <p><strong>Date :</strong> Juin 2024</p>
-      <p><strong>Contexte :</strong> Projet universitaire - Développement d’une application de gestion de médiathèque en Java avec interface graphique JavaFX.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Doubli Hoda</p>
-    </div>
+        <!-- Projet 2 : Covoiturage -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/covoiturage_item.jpg" alt="Covoiturage">
+          </div>
+          <div class="project-content">
+            <h3>Application de Covoiturage</h3>
+            <div class="project-meta">
+              <span>📅 Fév - Mai 2025</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Six personnes, six visions différentes. Trouver un terrain d'entente n'a pas été simple, mais cette phase de réflexion collective a enrichi le projet. J'ai bossé sur le contrôleur et la console. Une vraie leçon de travail d'équipe.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">Qt</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">UML</span>
+            </div>
+            <p class="project-team">👥 Équipe de 6</p>
+            <a href="projet-covoiturage.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
 
-    <div class="projet-card">
-      <h2><a href="projet-svd.html">SVD-Image-Compression</a></h2>
-      <p><strong>Date :</strong> Février 2024</p>
-      <p><strong>Contexte :</strong> Projet d’analyse numérique - Application de la SVD à la compression d’images en niveaux de gris ou RGB.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Doubli Hoda</p>
-    </div>
+        <!-- Projet 3 : JHAL-Auction -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/logo_jhal_auction.png" alt="JHAL-Auction">
+          </div>
+          <div class="project-content">
+            <h3>JHAL-AUCTION</h3>
+            <div class="project-meta">
+              <span>📅 Oct - Déc 2024</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Un semestre entier à jongler entre modélisation, réseau UDP et JavaFX. Des désaccords, des revirements, mais au final une salle des ventes qui fonctionne en temps réel. La connexion entre messages réseau et interface graphique ? Un vrai casse-tête résolu collectivement.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">JavaFX</span>
+              <span class="tech-tag">UDP</span>
+              <span class="tech-tag">SQLite</span>
+            </div>
+            <p class="project-team">👥 Équipe de 4</p>
+            <a href="jhal-auction.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
 
-    <div class="projet-card">
-      <h2><a href="projet-inpainting.html">Résolution de Systèmes Linéaires - Inpainting</a></h2>
-      <p><strong>Date :</strong> Décembre 2023</p>
-      <p><strong>Contexte :</strong> Projet universitaire - Comparaison d’algorithmes directs et itératifs appliqués à la restauration d’image (inpainting).</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Doubli Hoda</p>
-    </div>
-    
-        <div class="projet-card">
-      <h2><a href="projet-labyrinthe.html">Simulation de Labyrinthes en C</a></h2>
-      <p><strong>Date :</strong> Novembre 2023</p>
-      <p><strong>Contexte :</strong> Projet universitaire - Génération et résolution de labyrinthes parfaits en langage C avec différents algorithmes de parcours de graphe.</p>
-      <p class="auteurs"><strong>Équipe :</strong> Assia AIT TALEB, Doubli Hoda</p>
-    </div>
+        <!-- Projet 4 : Bibliothèque -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/biblio_icon.png" alt="bibliotheque">
+          </div>
+          <div class="project-content">
+            <h3>Bibliothèque d'Alexandrie</h3>
+            <div class="project-meta">
+              <span>📅 Juin 2024</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Une vraie bouffée d'air frais. En partant d'un modèle console classique, nous avons réimaginé une bibliothèque virtuelle avec JavaFX. Ce qui m'a le plus plu ? Créer une interface graphique fluide et intuitive.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">JavaFX</span>
+              <span class="tech-tag">FXML</span>
+              <span class="tech-tag">SHA-256</span>
+            </div>
+            <p class="project-team">👥 Binôme avec Hoda</p>
+            <a href="projet-bibliotheque.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
 
-    <a href="index.html" class="back-button">← Retour à la page d'accueil</a>
-  </main>
+        <!-- Projet 5 : SVD -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+              <img src="images/svd_icon.jpg" alt="svd">
+          </div>
+          <div class="project-content">
+            <h3>SVD Image Compression</h3>
+            <div class="project-meta">
+              <span>📅 Février 2024</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Comment réduire la taille d'une image sans en perdre l'essence ? Avec Hoda, on a plongé dans les matrices pour trouver une réponse élégante : la décomposition en valeurs singulières. Les maths au service de l'image.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">SVD</span>
+              <span class="tech-tag">Matplotlib</span>
+            </div>
+            <p class="project-team">👥 Binôme avec Hoda</p>
+            <a href="projet-svd.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
+
+        <!-- Projet 6 : Inpainting -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/Img_Recons.png" alt="inpainting">
+          </div>
+          <div class="project-content">
+            <h3>Inpainting d'Image</h3>
+            <div class="project-meta">
+              <span>📅 Décembre 2023</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Comment restaurer une image dégradée sans savoir ce qu'il manque ? C'est cette question qui a guidé notre projet. Explorer différentes méthodes mathématiques pour "deviner" les pixels manquants. Une forme d'inpainting qui mêle analyse numérique et traitement d'image.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Jacobi</span>
+              <span class="tech-tag">Gradient</span>
+            </div>
+            <p class="project-team">👥 Binôme avec Hoda</p>
+            <a href="projet-inpainting.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
+
+        <!-- Projet 7 : Labyrinthe -->
+        <div class="project-card">
+          <div class="project-image">
+            <!-- Placeholder pour image - à remplacer -->
+            <img src="images/labyrinthe.jpg" alt="labyrinthe">
+          </div>
+          <div class="project-content">
+            <h3>Simulation de Labyrinthes</h3>
+            <div class="project-meta">
+              <span>📅 Novembre 2023</span>
+              <span>🎓 INSA Rouen</span>
+            </div>
+            <p class="excerpt">
+              Ce projet n'était pas un simple devoir technique, mais une immersion dans le monde fascinant des algorithmes. Le vrai tournant ? Comprendre que tout reposait sur la récursivité. Nous avons pris le temps de visualiser sur papier avant de coder. Ce moment d'alignement a tout débloqué.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">C</span>
+              <span class="tech-tag">Backtracking</span>
+              <span class="tech-tag">Dijkstra</span>
+              <span class="tech-tag">Graphes</span>
+            </div>
+            <p class="project-team">👥 Binôme avec Hoda</p>
+            <a href="projet-labyrinthe.html" class="project-link">Lire l'histoire complète</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="index.html" class="back-button">Retour à l'accueil</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
+  </footer>
+
 </body>
-
-<footer>
-  <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
-</footer>
-
 </html>

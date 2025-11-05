@@ -3,156 +3,495 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inpainting d'Image - Résolution Numérique</title>
+  <title>Inpainting d'Image - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
-    }
-    
-    .image-small {
-  max-width: 500px;
-  width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 1rem 0;
-}
-
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header h1 {
-      color: white;
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
 
-    footer {
-      background-color: #0a192f;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    h1, h2 {
-      color: #0a192f;
-    }
-
-    ul, table {
-      margin-top: 1rem;
-    }
-
-    table {
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
       width: 100%;
-      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
     }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    th {
-      background-color: #e0f2ff;
-    }
-
-    a {
-      color: #2563eb;
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
       text-decoration: none;
-      font-weight: bold;
     }
 
-    a:hover {
-      text-decoration: underline;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-github {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      border-color: var(--gris-fonce);
+    }
+
+    .btn-github:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(44,62,80,0.25);
+    }
+
+    /* Image placeholder */
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background-color: var(--gris-clair);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Bouton retour */
+    .back-section {
+      text-align: center;
+      margin: 3rem 0;
     }
 
     .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
       text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #112240;
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
     }
 
-    .screenshot {
-      max-width: 100%;
-      margin: 1rem 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Inpainting d'Image - Résolution Numérique</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>Inpainting d'Image</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Restauration d'images par méthodes numériques</p>
+      <div class="project-meta">
+        <span>📅 Décembre 2023</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Binôme avec Hoda</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">NumPy</span>
+        <span class="tech-tag">Jacobi</span>
+        <span class="tech-tag">Gradient conjugué</span>
+        <span class="tech-tag">Analyse numérique</span>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-github" href="https://github.com/A2SIA-AA/Restauration_Image" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+          Voir sur GitHub
+        </a>
+      </div>
+    </div>
   </header>
-  <main>
-    <h2>Une image abîmée, un défi numérique</h2>
-    <p>Comment restaurer une image dégradée sans savoir ce qu’il manque ? C’est cette question qui a guidé notre projet d’analyse numérique avec Hoda. À partir d’une image partiellement masquée, nous avons exploré différentes méthodes mathématiques pour « deviner » les pixels manquants - une forme d’inpainting.</p>
 
-    <p>Notre objectif était double : comparer des méthodes classiques de résolution de systèmes linéaires, et mesurer leur impact dans un cas concret de traitement d'image. Avec, en bonus, une belle montée en compétence sur les méthodes itératives que l’on croyait réservées aux chercheurs...</p>
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Reconstruire ce qui manque</h2>
 
-    <h2>Les approches testées</h2>
-    <table>
-      <tr><th>Méthode</th><th>Convergence</th><th>Résultat visuel</th><th>Temps/itération</th></tr>
-      <tr><td>Jacobi</td><td>Lente mais stable</td><td>Bonne si >400 itérations</td><td>~0.07 s</td></tr>
-      <tr><td>Descente de gradient</td><td>Sensible au pas &alpha;</td><td>Acceptable mais flou ↗ avec R</td><td>~0.10 s</td></tr>
-      <tr><td>Gradient conjugué</td><td>Converge < 60 itérations</td><td>Très net dès 30 itérations</td><td>~0.15 s</td></tr>
-    </table>
+        <p>
+          Comment restaurer une image dégradée sans savoir ce qu'il manque ? C'est cette question qui a guidé notre projet avec Hoda. Explorer différentes méthodes mathématiques pour <span class="highlight">"deviner" les pixels manquants</span>. Une forme d'inpainting qui mêle analyse numérique et traitement d'image.
+        </p>
 
-    <h2>Ce qu’on a appris</h2>
-    <ul>
-      <li>La puissance de la vectorisation NumPy (gain x30 !)</li>
-      <li>L’importance du choix des paramètres (R, &alpha;, N...)</li>
-      <li>Comment un problème de maths se transforme en outil visuel</li>
-    </ul>
+        <p>
+          Le défi était de taille : à partir d'une image partiellement altérée (pixels manquants, rayures, dégradations), notre algorithme devait <span class="highlight">reconstruire l'information perdue</span> en se basant uniquement sur les pixels voisins conservés.
+        </p>
 
-    <h2>Exemple d'images</h2>
-    <p>Image altérée :</p>
-    <img src="images/Img_AltGray.png" alt="Image altérée" class="image-small">
-    <p>Image restaurée :</p>
-   <img src="images/Img_Recons.png" alt="Image restaurée" class="image-small">
+        <div class="anecdote">
+          <p>
+            💡 <strong>Le déclic :</strong> Comprendre que ce problème de restauration pouvait être transformé en un système d'équations linéaires géant. Chaque pixel manquant devient une inconnue, et les pixels voisins créent des contraintes. Résoudre ce système, c'était résoudre l'inpainting ! Voir une image altérée se reconstruire progressivement, itération après itération... c'était hypnotisant.
+          </p>
+        </div>
 
+        <p>
+          On a implémenté plusieurs méthodes : <span class="highlight">Jacobi, Gauss-Seidel, et le gradient conjugué</span>. Chacune avec ses avantages : Jacobi est simple mais lente, Gauss-Seidel converge plus vite, et le gradient conjugué est le plus efficace pour les grandes images.
+        </p>
 
-    <h2>Architecture du code</h2>
-    <pre>
-main.py        # Point d’entrée : lance les expériences
-algo.py        # Méthodes : Jacobi, Gradient, Gradient conjugué
-affichage.py   # Affichage graphique (matplotlib)
-data.py        # Génère A et b
-    </pre>
+        <p>
+          Ce projet m'a appris que <span class="highlight">l'analyse numérique n'est pas qu'une théorie abstraite.</span> C'est un outil puissant pour résoudre des problèmes visuels, pour reconstruire l'inconnu à partir du connu. Pour donner vie à ce qui semblait perdu.
+        </p>
 
-    <h2>Voir le projet</h2>
-    <p>
-      <a href="https://github.com/A2SIA-AA/Restauration_Image.git" target="_blank">Accéder au dépôt GitHub</a>
-    </p>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🧮 Formulation mathématique :</span> Transformer le problème d'inpainting en un système linéaire Ax=b avec des dizaines de milliers d'inconnues.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⏱️ Performance :</span> Les méthodes itératives prennent du temps sur les grandes images. Optimiser la convergence était crucial.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Critères de convergence :</span> Déterminer quand arrêter les itérations. Trop tôt = résultat imprécis. Trop tard = calculs inutiles.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 Gestion de la mémoire :</span> Manipuler des matrices creuses pour ne pas saturer la RAM avec les grandes images.</li>
+        </ul>
 
-    <a href="projets.html" class="back-button">← Retour aux projets</a>
-  </main>
+        <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🔢 Méthodes itératives :</span> Maîtriser Jacobi, Gauss-Seidel, et le gradient conjugué pour résoudre des systèmes linéaires.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🖼️ Traitement d'image :</span> Manipuler des images comme des matrices, travailler pixel par pixel.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">📐 Analyse numérique :</span> Comprendre la convergence, la stabilité, et l'optimisation d'algorithmes itératifs.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">⚡ Optimisation Python :</span> Utiliser NumPy efficacement, vectoriser les calculs, gérer les matrices creuses.</li>
+          <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Trade-offs :</span> Équilibrer précision et temps de calcul selon les contraintes du problème.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
+
+      <h2>Fonctionnement technique</h2>
+
+      <div class="project-image">
+        <img src="images/Img_AltGray.png" alt="Image altérée">
+      </div>
+      <p style="text-align: center; font-style: italic;">Image altérée (avant restauration)</p>
+
+      <h3>Principe de l'inpainting</h3>
+      <p>
+        L'idée est de <strong>combler les pixels manquants</strong> en interpolant à partir des pixels voisins conservés. Mathématiquement, on résout un système linéaire où chaque pixel manquant est une inconnue.
+      </p>
+
+      <h3>Méthodes implémentées</h3>
+      <ul>
+        <li><strong>Méthode de Jacobi :</strong> Méthode itérative simple, converge lentement mais robuste.</li>
+        <li><strong>Gauss-Seidel :</strong> Amélioration de Jacobi, utilise immédiatement les valeurs mises à jour.</li>
+        <li><strong>Gradient conjugué :</strong> Méthode la plus efficace, converge rapidement même sur les grandes matrices.</li>
+      </ul>
+
+      <h3>Résultat final</h3>
+      <div class="project-image" style="height: 400px;">
+        <img src="images/Img_Recons.png" alt="Image reconstruite">
+      </div>
+      <p style="text-align: center; font-style: italic;">Image reconstruite par inpainting</p>
+
+      <h3>Technologies utilisées</h3>
+      <ul>
+        <li><strong>Python</strong> - langage principal</li>
+        <li><strong>NumPy</strong> - calculs matriciels et méthodes itératives</li>
+        <li><strong>Matplotlib</strong> - visualisation des résultats</li>
+        <li><strong>PIL/Pillow</strong> - manipulation d'images</li>
+      </ul>
+
+      <h3>Auteurs</h3>
+      <p>Assia AIT TALEB & Hoda DOUBLI<br>
+      GM3 - INSA Rouen Normandie</p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a montré que <span class="highlight">l'analyse numérique peut résoudre des problèmes visuels concrets.</span> Transformer une image altérée en un système d'équations, puis le résoudre pour reconstruire ce qui manquait... c'était à la fois mathématique et artistique. Une belle fusion entre rigueur et créativité.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
   </footer>
+
 </body>
 </html>
-

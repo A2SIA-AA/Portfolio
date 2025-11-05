@@ -3,157 +3,507 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chatbot RAG Documentaire</title>
+  <title>Chatbot RAG Documentaire - Assia AIT TALEB</title>
   <style>
-    :root {
-      --bg: #f4f9ff;
-      --ink: #1a1a1a;
-      --brand: #0a192f;
-      --accent: #64ffda;
-      --link: #2563eb;
-      --card: #ffffff;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--ink);
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
       line-height: 1.6;
     }
-    header {
-      background-color: var(--brand);
-      color: white;
-      padding: 1rem 1.25rem;
-      text-align: center;
-    }
-    header h1 { margin: 0.2rem 0 0; color: #fff; }
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem 1.25rem;
-    }
-    h2 { color: var(--brand); margin-top: 1.5rem; }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.5rem; }
-    a { color: var(--link); text-decoration: none; font-weight: bold; }
-    a:hover { text-decoration: underline; }
-    .back-button {
-      display: inline-block; margin-top: 2rem; padding: 0.6rem 1rem;
-      background-color: var(--brand); color: var(--accent);
-      border-radius: 8px; text-decoration: none;
-    }
-    .back-button:hover { background-color: #112240; }
 
-    /* --- Galerie d’illustrations --- */
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-      margin-top: 1rem;
-    }
-    @media (min-width: 720px) {
-      .gallery { grid-template-columns: repeat(2, 1fr); }
-    }
-    .card {
-      background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(10,25,47,0.08);
-      overflow: hidden;
-      border: 1px solid rgba(10,25,47,0.06);
-    }
-    .card img {
-      display: block;
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
       width: 100%;
-      height: auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
     }
-    .card figcaption {
-      padding: 0.9rem 1rem;
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+      position: relative;
+      padding-left: 0.5rem;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
+    }
+
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
       font-size: 0.95rem;
-      color: #0a192f;
-      border-top: 1px solid rgba(10,25,47,0.06);
+      font-weight: 600;
     }
-    .note {
-      font-size: 0.92rem;
-      background: #e8f2ff;
-      border-left: 4px solid #2563eb;
-      padding: 0.8rem 1rem;
-      border-radius: 6px;
-    }
-    footer {
-      background-color: var(--brand);
-      color: white;
+
+
+/* Images des projets */
+.project-image {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--gris-clair);
+  border-radius: 15px;
+  margin: 2rem auto;
+}
+
+.project-image img {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+
+    /* Bouton retour */
+    .back-section {
       text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
+      margin: 3rem 0;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
+    }
+
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    .cta-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  border: 2px solid transparent;
+}
+
+.btn-github {
+  background: var(--gris-fonce);
+  color: var(--blanc);
+  border-color: var(--gris-fonce);
+}
+.btn-github:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(44,62,80,0.25);
+}
+
+
+
+    /* Footer */
+    footer {
+      background: var(--gris-fonce);
+      color: var(--blanc);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div>Projet de stage - AMDIE</div>
-  <h1>Chatbot RAG Documentaire</h1>
-</header>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#histoire">À propos</a></li>
+        <li><a href="index.html#competences">Compétences</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<main>
-  <h2>Une IA au service de la documentation</h2>
-  <p>
-    Ce projet, mené dans le cadre de mon stage chez AMDIE, conçoit un chatbot capable de répondre à des questions
-    précises à partir de documents internes (PDF, Word, Excel, HTML, images).
-  </p>
-  <p>
-    Grâce à l’approche <strong>RAG - Retrieval-Augmented Generation</strong>, l’IA ne “devine” pas : elle récupère
-    d’abord les sources pertinentes (via une base vectorielle) puis génère une réponse argumentée. Le système inclut la
-    gestion des droits d’accès et une architecture multi-agents.
-  </p>
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>Chatbot RAG Documentaire</h1>
+      <div class="project-meta">
+        <span>📅 Mai - Août 2025</span>
+        <span>🏢 AMDIE - Rabat</span>
+        <span>👤 Projet solo</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">RAG</span>
+        <span class="tech-tag">LangChain</span>
+        <span class="tech-tag">ChromaDB</span>
+        <span class="tech-tag">Gemini</span>
+        <span class="tech-tag">FastAPI</span>
+      </div>
+      <div class="cta-buttons">
+      <a class="btn btn-github" href="https://github.com/A2SIA-AA/Chatbot_AMDIE" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
+        Voir sur GitHub
+      </a>
+    </div>
+    </div>
+  </header>
 
-  <h2>Ce que j’ai mis en place</h2>
-  <ul>
-    <li>Pipeline d’extraction multi-formats (<code>Unstructured</code>, <code>Pandas</code>, <code>BeautifulSoup</code>).</li>
-    <li>Indexation vectorielle (embeddings HF) dans <code>ChromaDB</code> avec métadonnées pour le filtrage par rôles.</li>
-    <li>Orchestration multi-agents (Analyseur, Sélecteur, Calculateur, Synthétiseur).</li>
-    <li>Génération de réponses par <code>Gemini</code> en se limitant aux sources autorisées.</li>
-    <li>API REST + MCP (client/serveur) pour interfacer l’UI et le backend.</li>
-  </ul>
+  <section class="story-section">
+  <div class="container">
+    <div class="story-box">
+      <h2>L'histoire derrière le projet</h2>
 
-  <div class="note">
-    <strong>Stack résumé :</strong> FastAPI - LangGraph - ChromaDB - Gemini - Keycloak (rôles) · Next.js (front)
+      <p>
+        Ce projet est né d’un besoin simple à formuler mais complexe à résoudre : permettre aux collaborateurs de poser une question et d’obtenir une réponse précise à partir de documents internes (PDF, Excel, HTML, etc.). Pas de génération approximative, pas d’invention. <span class="highlight">Juste la bonne information, au bon moment.</span>
+      </p>
+
+      <p>
+        Très vite, j’ai compris que ce projet allait me faire sortir de ma zone de confort. Il a fallu construire un pipeline complet : extraction des contenus multi-formats, structuration, vectorisation des données, puis création d’une base documentaire interrogeable par un modèle d’IA. Chaque étape était un nouveau défi et une nouvelle compétence à acquérir.
+      </p>
+
+      <p>
+        L’architecture finale s’appuie sur un pipeline d’extraction, une vectorisation automatisée via <span class="highlight">LangChain</span> et un stockage dans <span class="highlight">ChromaDB</span> avec des métadonnées permettant de filtrer l’accès selon le rôle utilisateur. J’ai également conçu une architecture multi-agents pour analyser la requête, sélectionner les bons documents et produire une réponse synthétique.
+      </p>
+
+      <p>
+        Le moment clé du projet a été l’intégration du serveur MCP. À partir de là, le système est devenu réellement exploitable : le backend, l’API, la base vectorielle et l’interface pouvaient communiquer de manière fluide. <span class="highlight">Ce n’était plus un prototype en local, mais un produit fonctionnel.</span>
+      </p>
+
+      <p>
+        Ce projet m'a appris deux choses : l'importance de l'architecture dans un projet d'IA, et le fait qu'une solution n'a de valeur que si elle est utile. C'est ce que j'aime dans l'IA appliquée : transformer une documentation dormante en un outil intelligent qui simplifie la vie de l'utilisateur.
+      </p>
+
+      <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Les difficultés rencontrées</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">📄 Extraction multi-formats :</span> Gérer PDF, Excel, HTML avec leurs structures différentes. Chaque format nécessitait une approche spécifique pour extraire le contenu de manière cohérente.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔍 Chunking intelligent :</span> Découper les documents en morceaux pertinents sans casser le contexte. Trouver la bonne taille de chunk pour optimiser la recherche vectorielle.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Pertinence des réponses :</span> Éviter que le modèle invente des informations (hallucinations). Forcer la réponse à se baser uniquement sur les sources récupérées.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔐 Gestion des droits d'accès :</span> Filtrer les documents selon les rôles utilisateurs dans ChromaDB via les métadonnées. Garantir qu'un utilisateur ne puisse pas accéder à des informations non autorisées.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">⚡ Performance :</span> Optimiser les requêtes vectorielles et les appels API pour réduire la latence. L'utilisateur ne doit pas attendre 10 minutes pour une réponse.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔄 Orchestration multi-agents :</span> Coordonner plusieurs agents (analyseur, sélecteur, calculateur, synthétiseur) sans perdre le fil de la conversation.</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce que j'ai appris</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🧠 Architecture RAG :</span> Comprendre le fonctionnement de Retrieval-Augmented Generation, de la vectorisation à la génération de réponse.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔗 LangChain :</span> Maîtriser l'orchestration de chaînes LLM, la gestion des embeddings, et l'utilisation de retrievers personnalisés.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">📊 ChromaDB :</span> Configurer une base vectorielle, gérer les collections, et optimiser les requêtes de similarité avec métadonnées.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🤖 LangGraph :</span> Créer des workflows complexes avec plusieurs agents qui communiquent et se coordonnent.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔌 FastAPI & MCP :</span> Développer une API REST robuste et connecter un serveur MCP pour l'interfaçage client-serveur.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🔐 Keycloak :</span> Intégrer un système de gestion des rôles et permissions pour sécuriser l'accès aux documents.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">📝 Prompt Engineering :</span> Rédiger des prompts efficaces pour guider le modèle et éviter les hallucinations.</li>
+        <li style="margin-bottom: 0.8rem;"><span class="highlight">🎯 Gestion de projet :</span> Travailler en autonomie, documenter mon code, itérer rapidement sur les problèmes rencontrés.</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; color: var(--bleu-fonce);">Ce qui m'a le plus marqué</h3>
+      <p>
+        Le moment où j'ai réussi à intégrer le serveur MCP et voir <span class="highlight">tout le système fonctionner de bout en bout</span> : un utilisateur pose une question via l'interface, l'API traite la requête, les agents analysent et récupèrent les bons documents dans ChromaDB selon les droits d'accès, Gemini génère une réponse basée sur ces sources, et tout s'affiche en quelques secondes. Ce n'était plus un prototype, mais un véritable produit utilisable.
+      </p>
+    </div>
   </div>
+</section>
 
-  <h2>Architecture & orchestration</h2>
-  <section class="gallery">
-    <figure class="card">
-      <img src="images/Architecture_final.png" alt="Architecture globale : API REST → MCP → système multi-agents → base vectorielle → sources (PDF/Excel) avec contrôle d’accès." loading="lazy">
-      <figcaption><strong>Architecture globale</strong> - Chaîne complète de la question à la réponse (API, MCP, multi-agents, ChromaDB, sources).</figcaption>
-    </figure>
 
-    <figure class="card">
-      <img src="images/diagramme_agent.png" alt="Diagramme d’orchestration des agents : RAG → Sélecteur → Analyseur ↔ Calculateur → Synthétiseur." loading="lazy">
-      <figcaption><strong>Orchestration des agents</strong> - Flux entre RAG, Sélecteur, Analyseur, Calculateur (si nécessaire) et Synthétiseur.</figcaption>
-    </figure>
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
 
-    <figure class="card">
-      <img src="images/interface_accueil.png" alt="capture de l’interface du chatbot." loading="lazy">
-      <figcaption>Prototype d’interface - Aperçu d’un écran de test.</figcaption>
-    </figure>
+      <h2>Une IA au service de la documentation</h2>
+
+      <div class="project-image">
+        <img src="images/interface_accueil.png" alt="Chatbot RAG Documentaire" />
+      </div>
+
+      <p>
+        Ce projet, mené dans le cadre de mon stage chez AMDIE, conçoit un chatbot capable de répondre à des questions précises à partir de documents internes (PDF, Excel).
+      </p>
+
+      <p>
+        Grâce à l'approche <strong>RAG - Retrieval-Augmented Generation</strong>, l'IA ne "devine" pas : elle récupère d'abord les sources pertinentes (via une base vectorielle) puis génère une réponse argumentée. Le système inclut la gestion des droits d'accès et une architecture multi-agents.
+      </p>
+        <div class="project-image" style="height: 300px; font-size: 2rem;">
+        <!-- Placeholder pour diagramme architecture - à remplacer -->
+        <img src="images/diagramme_agent.png" alt="Diagramme d'agent">
+      </div>
+
+      <h3>Ce que j'ai mis en place</h3>
+      <ul>
+        <li>Pipeline d'extraction multi-formats</li>
+        <li>Indexation vectorielle (embeddings) dans ChromaDB avec métadonnées pour le filtrage par rôles</li>
+        <li>Orchestration multi-agents (Analyseur, Sélecteur, Calculateur, Synthétiseur)</li>
+        <li>Génération de réponses par Gemini en se limitant aux sources autorisées</li>
+        <li>API REST + MCP (client/serveur) pour interfacer l'UI et le backend</li>
+      </ul>
+
+      <h3>Architecture globale</h3>
+      <p>
+        <strong>Stack technique :</strong> FastAPI • LangGraph • ChromaDB • Gemini • Keycloak (rôles) • Next.js (front)
+      </p>
+
+      <div class="project-image" style="height: 300px; font-size: 2rem;">
+        <!-- Placeholder pour diagramme architecture - à remplacer -->
+        <img src="images/Architecture_final.png" alt="Diagramme d'architecture">
+      </div>
+
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a appris à construire un système IA de bout en bout : de l'extraction de données à la génération de réponses, en passant par l'orchestration d'agents et la gestion des accès. Mais surtout, il m'a confirmé que <span class="highlight">je veux continuer à créer des outils IA qui ont un impact réel.</span>
+      </p>
+
+    </div>
   </section>
 
-  <h2>Prochaines étapes</h2>
-  <ul>
-    <li>Journalisation avancée et suivi utilisateur.</li>
-    <li>Démo web polie (Next.js, Shadcn UI).</li>
-    <li>Reformulation intelligente des requêtes.</li>
-    <li>Évaluation de LLM légers pour exécution locale.</li>
-  </ul>
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
 
-  <a href="projets.html" class="back-button">← Retour aux projets</a>
-</main>
-
-<footer>
-  <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
+  </footer>
 
 </body>
 </html>

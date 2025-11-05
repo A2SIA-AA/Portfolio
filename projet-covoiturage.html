@@ -3,142 +3,506 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application de Covoiturage – Projet C++</title>
+  <title>Application de Covoiturage - Assia AIT TALEB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
-      color: #1a1a1a;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header {
-      background-color: #0a192f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+    :root {
+      --bleu-pastel: #a8d5e2;
+      --bleu-clair: #d4e9f2;
+      --bleu-fonce: #5a8ca3;
+      --gris-fonce: #2c3e50;
+      --blanc: #ffffff;
+      --gris-clair: #f8f9fa;
     }
 
-    header h1 {
-      color: white;
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--blanc);
+      color: var(--gris-fonce);
+      line-height: 1.6;
     }
 
-    main {
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding: 1.2rem 0;
+    }
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--bleu-fonce);
+      text-decoration: none;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--gris-fonce);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--bleu-pastel);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bleu-fonce);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Header du projet */
+    .project-header {
+      margin-top: 80px;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, var(--bleu-clair) 0%, var(--blanc) 100%);
+    }
+
+    .project-header .container {
       max-width: 900px;
-      margin: auto;
-      padding: 2rem;
+      margin: 0 auto;
+    }
+
+    .project-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 1rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1rem;
+      color: var(--bleu-fonce);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .project-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section story */
+    .story-section {
+      padding: 3rem 0;
+      background: var(--gris-clair);
+    }
+
+    .story-box {
+      background: var(--blanc);
+      padding: 2.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--bleu-pastel);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-box h2 {
+      font-size: 1.8rem;
+      color: var(--bleu-fonce);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      margin-bottom: 1.3rem;
+      color: var(--gris-fonce);
+    }
+
+    .story-box .highlight {
+      color: var(--bleu-fonce);
+      font-weight: 600;
+    }
+
+    .story-box .anecdote {
+      background: var(--bleu-clair);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--bleu-pastel);
+    }
+
+    .story-box .anecdote p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Section technique */
+    .technical-section {
+      padding: 3rem 0;
     }
 
     h2 {
-      color: #0a192f;
-      margin-top: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gris-fonce);
+      margin-bottom: 2rem;
+      margin-top: 2rem;
     }
 
-    img {
-      max-width: 100%;
-      margin: 1rem 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    h3 {
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
     }
 
     ul {
-      padding-left: 1.2rem;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.7rem;
     }
 
-    a {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: bold;
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 2rem 0;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .tech-tag {
+      padding: 0.5rem 1.2rem;
+      background: var(--bleu-clair);
+      color: var(--bleu-fonce);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .cta-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  border: 2px solid transparent;
+}
+
+.btn-github {
+  background: var(--gris-fonce);
+  color: var(--blanc);
+  border-color: var(--gris-fonce);
+}
+.btn-github:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(44,62,80,0.25);
+}
+
+.btn-demo {
+  background: var(--blanc);
+  color: var(--gris-fonce);
+  border-color: var(--bleu-pastel);
+}
+.btn-demo:hover {
+  background: var(--bleu-pastel);
+  color: var(--blanc);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168,213,226,0.35);
+}
+
+
+    /* Image placeholder */
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      background-color: var(--gris-clair);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Bouton retour */
+    .back-section {
+      text-align: center;
+      margin: 3rem 0;
     }
 
     .back-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.5rem 1rem;
-      background-color: #0a192f;
-      color: #64ffda;
-      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2rem;
+      background: var(--blanc);
+      color: var(--gris-fonce);
       text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid var(--bleu-clair);
+      transition: all 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #112240;
+      background: var(--bleu-pastel);
+      border-color: var(--bleu-pastel);
+      color: var(--blanc);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(168, 213, 226, 0.3);
     }
 
+    .back-button::before {
+      content: '←';
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
     footer {
-      background-color: #0a192f;
-      color: white;
+      background: var(--gris-fonce);
+      color: var(--blanc);
       text-align: center;
-      padding: 1rem;
+      padding: 2rem;
       margin-top: 4rem;
-      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 2rem;
+      }
+
+      .story-box {
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        height: 250px;
+        font-size: 3rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Application de Covoiturage - Projet C++</h1>
-</header>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index-new.html" class="logo">Assia AIT TALEB</a>
+      <ul>
+        <li><a href="index-new.html#accueil">Accueil</a></li>
+        <li><a href="index-new.html#histoire">À propos</a></li>
+        <li><a href="index-new.html#competences">Compétences</a></li>
+        <li><a href="projets-new.html">Projets</a></li>
+        <li><a href="index-new.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<main>
-  <h2>Un voyage d'équipe</h2>
-  <p>
-    Ce projet a été réalisé en groupe de six, sur un semestre. Dès le départ, le ton était donné : beaucoup d’idées, d’approches différentes, et une modélisation qui a nécessité... plusieurs tours de table !
-  </p>
-  <p>
-    Trouver un terrain d'entente n’a pas été facile, mais cette étape de réflexion collective a été une vraie richesse. Une fois l’architecture bien posée, nous avons réparti l’implémentation par binômes. J’ai personnellement travaillé sur la partie Controlleur et console.
-  </p>
-  <p>
-    L’interface a été un vrai défi : connecter les actions utilisateur à la base de données et aux différentes vues, en C++, avec Qt... Mais une fois en place, voir notre application fonctionner était une réelle satisfaction !
-  </p>
-  
-  <img src="images/covoiturage.png" alt="Capture interface graphique">
+  <!-- Header du projet -->
+  <header class="project-header">
+    <div class="container">
+      <h1>Application de Covoiturage</h1>
+      <p style="font-size: 1.2rem; color: var(--bleu-fonce); font-weight: 500;">Projet C++ avec Qt</p>
+      <div class="project-meta">
+        <span>📅 Février - Mai 2025</span>
+        <span>🎓 INSA Rouen</span>
+        <span>👥 Équipe de 6</span>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">Qt</span>
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">UML</span>
+      </div>
+        <div class="cta-buttons">
+      <a class="btn btn-github" href="https://github.com/A2SIA-AA/Covoiturage" target="_blank" rel="noopener noreferrer" aria-label="Voir le code sur GitHub">
 
-  <h2>Objectif</h2>
-  <p>Créer une application complète de covoiturage permettant à un utilisateur de proposer un trajet, réserver une place, et gérer ses annonces ou réservations, le tout dans un environnement local avec base de donnée.</p>
+        Voir sur GitHub
+      </a>
+      </div>
+    </div>
+  </header>
 
-  <h2>Fonctionnalités principales</h2>
-  <ul>
-    <li>Inscription et authentification utilisateur</li>
-    <li>Ajout, modification et suppression de trajets</li>
-    <li>Réservation en ligne de places disponibles</li>
-    <li>Interface console et interface graphique Qt</li>
-    <li>Consultation des trajets et profil utilisateur</li>
-    <li>Système de base de données intégrée (fichiers ou SQLite)</li>
-  </ul>
+  <!-- Section Story -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-box">
+        <h2>Un voyage d'équipe</h2>
 
-  <h2>Technologies utilisées</h2>
-  <ul>
-    <li><strong>C++</strong> (modélisation orientée objet)</li>
-    <li><strong>Qt</strong> pour l'interface graphique</li>
-    <li><strong>SQLite</strong> ou fichiers pour la persistance</li>
-    <li><strong>Git</strong> pour le versionnage et la collaboration</li>
-  </ul>
+        <p>
+          Ce projet a été réalisé en groupe de six, sur un semestre. Dès le départ, le ton était donné : <span class="highlight">beaucoup d'idées, d'approches différentes</span>, et une modélisation qui a nécessité... plusieurs tours de table !
+        </p>
 
-    <h2>Diagramme UML</h2>
-      <img src="images/2ClasseSimple.png" alt="Diagramme de classes UML">
-  <img src="images/3CasUtilisation.png" alt="Diagramme de cas d'utilisation">
-  <h2>Lien GitHub</h2>
-  <p>
-    <a href="https://github.com/A2SIA-AA/Covoiturage.git" target="_blank">Voir le projet sur GitHub</a>
-  </p>
+        <p>
+          Trouver un terrain d'entente n'a pas été facile. Six personnes, ça veut dire six façons de voir les choses. On avait des débats sur l'architecture, sur la conception de la base de données, sur les choix techniques. Certains voulaient privilégier la simplicité, d'autres la robustesse. <span class="highlight">Mais cette étape de réflexion collective a été une vraie richesse.</span>
+        </p>
 
-  <a href="projets.html" class="back-button">← Retour aux projets</a>
-</main>
+        <div class="anecdote">
+          <p>
+            💡 <strong>L'art du compromis :</strong> Au début, on passait plus de temps à discuter qu'à coder. Et honnêtement, ça nous frustrait un peu. Mais rétrospectivement, c'était nécessaire. Parce qu'une fois l'architecture bien posée, et tout le monde aligné, l'implémentation s'est faite beaucoup plus fluidement. On a réparti le travail par binômes, et chacun savait exactement ce qu'il avait à faire.
+          </p>
+        </div>
 
-<footer>
-  <p>&copy; 2025 Assia AIT TALEB — Tous droits réservés</p>
-</footer>
+        <p>
+          J'ai personnellement travaillé sur <span class="highlight">la partie Contrôleur et console.</span> Connecter les actions utilisateur à la base de données et aux différentes vues, en C++... c'était technique. Il fallait gérer l'affichage dynamique des trajets, les réservations, le filtrage par préférences, tout en gardant une interface fluide.
+        </p>
+
+        <p>
+          Mais une fois en place, voir notre application fonctionner était une réelle satisfaction ! Un utilisateur pouvait s'inscrire, proposer un trajet, consulter les annonces, réserver une place... Le tout avec une interface graphique Qt qui rendait l'expérience intuitive.
+        </p>
+
+        <p>
+          Ce projet m'a appris quelque chose d'essentiel : <span class="highlight">dans un grand groupe, la communication est aussi importante que le code.</span> Il faut savoir écouter, argumenter ses choix, accepter que sa solution ne soit pas toujours retenue. Mais au final, on construit quelque chose de plus solide collectivement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section technique -->
+  <section class="technical-section">
+    <div class="container">
+
+      <h2>Fonctionnement technique</h2>
+
+      <div class="project-image">
+        <!-- Placeholder pour screenshot - à remplacer -->
+        <img src="images/covoiturage.png" alt="Screenshot de l'application de covoiturage" >
+      </div>
+
+      <h3>Objectif</h3>
+      <p>
+        Créer une application complète de covoiturage permettant à un utilisateur de proposer un trajet, réserver une place, et gérer ses annonces ou réservations, le tout dans un environnement local avec base de données.
+      </p>
+
+      <h3>Fonctionnalités principales</h3>
+      <ul>
+        <li>Inscription et authentification utilisateur</li>
+        <li>Ajout, modification et suppression de trajets</li>
+        <li>Réservation en ligne de places disponibles</li>
+        <li>Interface console et interface graphique Qt</li>
+        <li>Consultation des trajets et profil utilisateur</li>
+        <li>Système de base de données intégrée (SQLite)</li>
+      </ul>
+
+      <h3>Architecture technique</h3>
+      <p>
+        Le projet suit une architecture MVC (Modèle-Vue-Contrôleur) classique :
+      </p>
+      <ul>
+        <li><strong>Modèle :</strong> Classes métier (Utilisateur, Trajet, Réservation) + gestion de la base SQLite</li>
+        <li><strong>Vue :</strong> Interface graphique Qt (widgets, layouts, signaux/slots)</li>
+        <li><strong>Contrôleur :</strong> Logique de navigation et connexion entre vues et modèle</li>
+      </ul>
+
+      <div class="project-image" style="height: 300px; font-size: 2rem;">
+        <!-- Placeholder pour diagramme - à remplacer -->
+        <img src="images/2ClasseSimple.png" alt="Diagramme de l'architecture de l'application de covoiturage">
+      </div>
+
+      <h3>Technologies utilisées</h3>
+      <ul>
+        <li><strong>C++</strong> : modélisation orientée objet</li>
+        <li><strong>Qt</strong> : framework pour l'interface graphique</li>
+        <li><strong>SQLite</strong> : base de données locale pour la persistance</li>
+        <li><strong>Git</strong> : versionnage et collaboration</li>
+      </ul>
+
+      <h3>Équipe</h3>
+      <p>
+        Assia AIT TALEB, Hanane AMZIL, Loraine DICKO, Joëlle FARHAT, Chaimae OURRAOUI, Il-Hême YAYA
+      </p>
+
+      <h3>Ce que j'en retiens</h3>
+      <p>
+        Ce projet m'a confrontée à <span class="highlight">la complexité du travail en grand groupe.</span> Coordonner six personnes, aligner les visions, répartir les tâches... ce n'est pas trivial. Mais j'ai appris à mieux communiquer mes idées, à défendre mes choix techniques, et surtout à accepter que la solution collective soit souvent meilleure que ma vision individuelle. Une vraie leçon de collaboration.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Bouton retour -->
+  <section class="back-section">
+    <div class="container">
+      <a href="projets.html" class="back-button">Retour aux projets</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Assia AIT TALEB - Tous droits réservés</p>
+  </footer>
 
 </body>
 </html>
-
